@@ -23,10 +23,10 @@ public class FlashlightLogic : NetworkBehaviour
     [SerializeField] private float _lerpDuration = .3f;
     private bool _isOn  
     {
-        get { return _networkOn.Value; }
+        get { return IsOwner ? _localOn : _networkOn.Value; }
         set 
         {
-            if (!IsOwner) return;
+            _localOn = value;
             setOnRpc(value);
         }
     }
@@ -82,27 +82,14 @@ public class FlashlightLogic : NetworkBehaviour
 
     private void Update()
     {
-        _flashlight.enabled = _isOn;
+        UpdateLight();
         lightRayCast();
         if (!IsOwner) return;
         batteryLevel();
         if (PauseManager.Instance.IsPaused) return;
-        if (Input.GetButtonDown("Flashlight Button")) lightSwitchRpc();
-        if (Input.GetKeyDown(KeyCode.P)) ChargeBatteryRpc(); // I guess this was temporary?
-        if (Input.GetButtonDown("Flashlight Focus")) flashlightFocusRpc();
-        if (Input.GetButtonUp("Flashlight Focus")) flashlightUnfocusRpc();
-    }
-
-    [Rpc(SendTo.ClientsAndHost)]
-    private void lightSwitchRpc()
-    {
-        lightSwitch();
-    }
-
-    [Rpc(SendTo.ClientsAndHost)]
-    private void ChargeBatteryRpc()
-    {
-        ChargeBattery();
+        if (Input.GetButtonDown("Flashlight Button")) lightSwitch();
+        if (Input.GetButtonDown("Flashlight Focus")) flashlightFocus();
+        if (Input.GetButtonUp("Flashlight Focus")) flashlightUnfocus();
     }
 
     [Rpc(SendTo.Server)]
@@ -126,19 +113,8 @@ public class FlashlightLogic : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void setAngleRpc(float angleValue)
     {
+        Debug.Log(angleValue);
         _networkAngle.Value = angleValue;
-    }
-
-    [Rpc(SendTo.ClientsAndHost)]
-    private void flashlightFocusRpc()
-    {
-        flashlightFocus();
-    }
-
-    [Rpc(SendTo.ClientsAndHost)]
-    private void flashlightUnfocusRpc()
-    {
-        flashlightUnfocus();
     }
 
     private void flashlightUnfocus()
@@ -220,20 +196,18 @@ public class FlashlightLogic : NetworkBehaviour
             _currentAngle = Mathf.Lerp(initialAngle, targetAngle, t);
             _currentRange = Mathf.Lerp(initialRange, targetRange, t);
 
-            UpdateLight(_currentAngle, _currentRange);
-
             yield return null;
         }
 
         _currentAngle = targetAngle;
         _currentRange = targetRange;
-        UpdateLight(targetAngle, targetRange);
     }
 
-    private void UpdateLight(float newAngle, float newRange)
+    private void UpdateLight()
     {
-        _flashlight.spotAngle = newAngle;
-        _flashlight.range = newRange;
+        _flashlight.enabled = _isOn;
+        _flashlight.spotAngle = _currentAngle;
+        _flashlight.range = _currentRange;
     }
 
     // Todo: Separate this so it can apply to other light sources
