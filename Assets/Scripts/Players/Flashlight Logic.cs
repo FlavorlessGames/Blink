@@ -162,6 +162,8 @@ public class FlashlightLogic : NetworkBehaviour
         {
             _currentBattery -= Time.deltaTime;
 
+            HUDManager.Instance.SetBatteryLevel(100 * _currentBattery / _maxBattery);
+
             if((_currentBattery < _lowBattery) && !_isFlickering)
             {
                 StartFlicker();

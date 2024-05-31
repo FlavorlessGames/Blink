@@ -159,7 +159,7 @@ MonoBehaviour:
   _lowBattery: 10
   _focusAngle: 30
   _focusRange: 85
-  _wideAngle: 100
+  _wideAngle: 80
   _wideRange: 20
   _lerpDuration: 0.3
 --- !u!136 &4526370939932856203
@@ -547,7 +547,7 @@ Light:
   m_Color: {r: 1, g: 0.89146227, b: 0.7216981, a: 1}
   m_Intensity: 2
   m_Range: 20
-  m_SpotAngle: 49
+  m_SpotAngle: 80
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
