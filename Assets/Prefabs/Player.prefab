@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4280727722
+  GlobalObjectIdHash: 254716095
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -154,9 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flashlight: {fileID: 916803265524365320}
   _flickerInterval: 0.2
-  _isFlickering: 0
   _maxBattery: 50
-  _lowBattery: 10
+  _lowBattery: 15
   _focusAngle: 30
   _focusRange: 85
   _wideAngle: 80

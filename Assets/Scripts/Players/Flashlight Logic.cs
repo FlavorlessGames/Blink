@@ -19,17 +19,37 @@ public class FlashlightLogic : NetworkBehaviour
     [SerializeField] private float _wideAngle = 100f;
     [SerializeField] private float _wideRange = 20f;
     [SerializeField] private float _lerpDuration = .3f;
-    private bool _isOn  
+    private bool _on  
     {
-        get { return IsOwner ? _localOn : _networkOn.Value; }
+        get 
+        { 
+            if (_forcedOff) return false;
+            return _turnedOn;
+        }
+        set { _turnedOn = value; }
+    }
+    private bool _turnedOn  
+    {
+        get { return IsOwner ? _localTurnedOn : _networkTurnedOn.Value; }
         set 
         {
-            _localOn = value;
-            setOnRpc(value);
+            _localTurnedOn = value;
+            setTurnedOnRpc(value);
         }
     }
-    private bool _localOn;  // Todo: This value isn't syncing correctly
-    private NetworkVariable<bool> _networkOn = new NetworkVariable<bool>();
+    private bool _localTurnedOn;
+    private NetworkVariable<bool> _networkTurnedOn = new NetworkVariable<bool>();
+    private bool _forcedOff  
+    {
+        get { return IsOwner ? _localForcedOff : _networkForcedOff.Value; }
+        set 
+        {
+            _localForcedOff = value;
+            setForcedOffRpc(value);
+        }
+    }
+    private bool _localForcedOff;
+    private NetworkVariable<bool> _networkForcedOff = new NetworkVariable<bool>();
     private float _currentBattery 
     {
         get { return IsOwner ? _localBattery : _networkBattery.Value; }
@@ -63,7 +83,8 @@ public class FlashlightLogic : NetworkBehaviour
     }
     private float _localRange;
     private NetworkVariable<float> _networkRange = new NetworkVariable<float>();
-    private bool _isFlickering = false;
+    private bool _flickering = false;
+    private float _flickerTimer;
     private Coroutine _lerpCoroutine;
 
     private void Start()
@@ -76,7 +97,7 @@ public class FlashlightLogic : NetworkBehaviour
     public override void OnNetworkSpawn() 
     {
         if (!IsOwner) return;
-        _isOn = true;
+        _turnedOn = true;
     }
 
     private void Update()
@@ -85,6 +106,7 @@ public class FlashlightLogic : NetworkBehaviour
         lightRayCast();
         if (!IsOwner) return;
         batteryLevel();
+        if (_flickering) flicker();
         if (PauseManager.Instance.IsPaused) return;
         if (Input.GetButtonDown("Flashlight Button")) lightSwitch();
         if (Input.GetButtonDown("Flashlight Focus")) flashlightFocus();
@@ -98,9 +120,15 @@ public class FlashlightLogic : NetworkBehaviour
     }
 
     [Rpc(SendTo.Server)]
-    private void setOnRpc(bool onValue)
+    private void setTurnedOnRpc(bool onValue)
     {
-        _networkOn.Value = onValue;
+        _networkTurnedOn.Value = onValue;
+    }
+
+    [Rpc(SendTo.Server)]
+    private void setForcedOffRpc(bool onValue)
+    {
+        _networkForcedOff.Value = onValue;
     }
 
     [Rpc(SendTo.Server)]
@@ -129,53 +157,52 @@ public class FlashlightLogic : NetworkBehaviour
 
     private void batteryLevel()
     {
-        if (!_isOn) return;
-        if (_currentBattery <= 0)
-        {
-            _isOn = false;
-            _currentBattery = 0f;
-            return;
-        }
+        if (!_turnedOn) return;
+        if (outOfBattery()) return;
+        updateBatteryLevel();
+        checkFlickering();
+    }
+
+    private void checkFlickering()
+    {
+        if (_flickering) return;
+        if (_currentBattery < _lowBattery) _flickering = true;
+    }
+
+    private bool outOfBattery()
+    {
+        if (_currentBattery > 0) return false;
+        _forcedOff = true;
+        _currentBattery = 0f;
+        return true;
+    }
+
+    private void updateBatteryLevel()
+    {
         _currentBattery -= Time.deltaTime;
         HUDManager.Instance.SetBatteryLevel(100 * _currentBattery / _maxBattery);
-        if (_isFlickering) return;
-        if (_currentBattery < _lowBattery) StartFlicker();
     }
 
     private void lightSwitch()
     {
         // AudioManager.instance.PlaySound(flashlightClick);
         if (_currentBattery < 0) return;
-        _isOn = !_isOn;
+        _turnedOn = !_turnedOn;
     }
 
-    IEnumerator Flicker()
+    private void flicker()
     {
-        _isFlickering = true;
-        while (_isFlickering)
-        {
-            lightSwitch(); // Toggle the light on/off
-            // AudioManager.instance.PlaySound(flashlightClick);
-            yield return new WaitForSeconds(_flickerInterval);
-        }
-    }
-
-    private void StartFlicker()
-    {
-        StartCoroutine(Flicker());
-    }
-
-    public void StopFlicker()
-    {
-        StopCoroutine(Flicker());
-        _isFlickering = false;
+        _flickerTimer -= Time.deltaTime;
+        if (_flickerTimer > 0) return;
+        _forcedOff = !_forcedOff;
+        _flickerTimer = _flickerInterval;
     }
 
     public void ChargeBattery()
     {
         _currentBattery = _maxBattery;
-        StopFlicker();
-        _isOn = true;
+        _flickering = false;
+        _forcedOff = false;
     }
 
     private IEnumerator LerpLight(float targetAngle, float targetRange)
@@ -201,7 +228,7 @@ public class FlashlightLogic : NetworkBehaviour
 
     private void UpdateLight()
     {
-        _flashlight.enabled = _isOn;
+        _flashlight.enabled = _on;
         _flashlight.spotAngle = _currentAngle;
         _flashlight.range = _currentRange;
     }
