@@ -6,24 +6,24 @@ public class Interactable : MonoBehaviour
 {
     public float Range { get { return _range; } }
     [SerializeField] private float _range = 10f;
-    public event GenericHandler InteractEvent;
-    public event GenericHandler OnHoverEvent;
-    public event GenericHandler EndHoverEvent;
+    public event InteractionHandler InteractEvent;
+    public event InteractionHandler OnHoverEvent;
+    public event InteractionHandler EndHoverEvent;
 
-    public void Hover()
+    public void Hover(PlayerInteraction player)
     {
-        OnHoverEvent?.Invoke();
+        OnHoverEvent?.Invoke(player);
     }
 
-    public void Interact()
+    public void Interact(PlayerInteraction player)
     {
-        InteractEvent?.Invoke();
+        InteractEvent?.Invoke(player);
     }
 
-    public void EndHover()
+    public void EndHover(PlayerInteraction player)
     {
-        EndHoverEvent?.Invoke();
+        EndHoverEvent?.Invoke(player);
     }
 
-    public delegate void GenericHandler();
+    public delegate void InteractionHandler(PlayerInteraction player);
 }

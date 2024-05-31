@@ -6,8 +6,7 @@ using System.Linq;
 
 public class PlayerInteraction : NetworkBehaviour
 {
-    [SerializeField] 
-    private GameObject _camera;
+    [SerializeField] private GameObject _camera;
     private Camera _cam;
     private Vector3 _screenCenter;
     private Interactable _current;
@@ -45,7 +44,7 @@ public class PlayerInteraction : NetworkBehaviour
         foreach (Interactable key in _tracking.Keys.ToList())
         {
             _tracking[key] -= Time.deltaTime;
-            if (_tracking[key] < 0) key.EndHover();
+            if (_tracking[key] < 0) key.EndHover(this);
             remove.Add(key);
         } 
         foreach (var toRemove in remove)
@@ -64,7 +63,7 @@ public class PlayerInteraction : NetworkBehaviour
             Interactable interactable = hit.collider.gameObject.GetComponent<Interactable>();
             if (interactable != null && Utility.InRange(hit.point, transform.position, interactable.Range))
             {
-                interactable.Hover();
+                interactable.Hover(this);
                 _current = interactable;
                 _tracking[interactable] = _hoverTime;
                 return;
@@ -75,6 +74,11 @@ public class PlayerInteraction : NetworkBehaviour
     private void interact()
     {
         if (_current == null) return;
-        _current.Interact();
+        _current.Interact(this);
+    }
+
+    public void PickupBattery()
+    {
+        GetComponent<FlashlightLogic>().ChargeBattery();
     }
 }

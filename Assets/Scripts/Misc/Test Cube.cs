@@ -16,7 +16,7 @@ public class InteractCube : NetworkBehaviour
         _interact.InteractEvent += interactHandler;
     }
 
-    private void interactHandler()
+    private void interactHandler(PlayerInteraction player)
     {
         spinRpc();
     }

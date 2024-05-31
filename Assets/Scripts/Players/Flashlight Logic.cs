@@ -26,7 +26,7 @@ public class FlashlightLogic : NetworkBehaviour
         get { return _networkOn.Value; }
         set 
         {
-            if (!_isOwner) return;
+            if (!IsOwner) return;
             setOnRpc(value);
         }
     }
@@ -34,7 +34,7 @@ public class FlashlightLogic : NetworkBehaviour
     private NetworkVariable<bool> _networkOn = new NetworkVariable<bool>();
     private float _currentBattery 
     {
-        get { return _isOwner ? _localBattery : _networkBattery.Value; }
+        get { return IsOwner ? _localBattery : _networkBattery.Value; }
         set 
         {
             _localBattery = value;
@@ -45,7 +45,7 @@ public class FlashlightLogic : NetworkBehaviour
     private NetworkVariable<float> _networkBattery = new NetworkVariable<float>();
     private float _currentAngle 
     {
-        get { return _isOwner ? _localAngle : _networkAngle.Value; }
+        get { return IsOwner ? _localAngle : _networkAngle.Value; }
         set 
         {
             _localAngle = value;
@@ -56,7 +56,7 @@ public class FlashlightLogic : NetworkBehaviour
     private NetworkVariable<float> _networkAngle = new NetworkVariable<float>();
     private float _currentRange 
     {
-        get { return _isOwner ? _localRange : _networkRange.Value; }
+        get { return IsOwner ? _localRange : _networkRange.Value; }
         set 
         {
             _localRange = value;
@@ -64,7 +64,6 @@ public class FlashlightLogic : NetworkBehaviour
         }
     }
     private float _localRange;
-    private bool _isOwner = false;
     private NetworkVariable<float> _networkRange = new NetworkVariable<float>();
     private Coroutine _lerpCoroutine;
 
@@ -77,8 +76,7 @@ public class FlashlightLogic : NetworkBehaviour
 
     public override void OnNetworkSpawn() 
     {
-        _isOwner = IsOwner;
-        if (!_isOwner) return;
+        if (!IsOwner) return;
         _isOn = true;
     }
 
@@ -86,9 +84,9 @@ public class FlashlightLogic : NetworkBehaviour
     {
         _flashlight.enabled = _isOn;
         lightRayCast();
-        if (!_isOwner) return;
-        if (PauseManager.Instance.IsPaused) return;
+        if (!IsOwner) return;
         batteryLevel();
+        if (PauseManager.Instance.IsPaused) return;
         if (Input.GetButtonDown("Flashlight Button")) lightSwitchRpc();
         if (Input.GetKeyDown(KeyCode.P)) ChargeBatteryRpc(); // I guess this was temporary?
         if (Input.GetButtonDown("Flashlight Focus")) flashlightFocusRpc();
@@ -161,6 +159,8 @@ public class FlashlightLogic : NetworkBehaviour
         if(_currentBattery > 0f)
         {
             _currentBattery -= Time.deltaTime;
+
+            HUDManager.Instance.SetBatteryLevel(100 * _currentBattery / _maxBattery);
 
             if((_currentBattery < _lowBattery) && !_isFlickering)
             {
