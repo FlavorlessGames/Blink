@@ -10,8 +10,6 @@ public class FlashlightLogic : NetworkBehaviour
     // public AudioClip flashlightClick;
     [SerializeField] private Light _flashlight;
     [SerializeField] private float _flickerInterval = .2f;
-    [SerializeField] private bool _isFlickering = false;
-
     [SerializeField] private float _maxBattery = 50f;
     [SerializeField] private float _lowBattery = 10f;
 
@@ -65,6 +63,7 @@ public class FlashlightLogic : NetworkBehaviour
     }
     private float _localRange;
     private NetworkVariable<float> _networkRange = new NetworkVariable<float>();
+    private bool _isFlickering = false;
     private Coroutine _lerpCoroutine;
 
     private void Start()
@@ -113,7 +112,6 @@ public class FlashlightLogic : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void setAngleRpc(float angleValue)
     {
-        Debug.Log(angleValue);
         _networkAngle.Value = angleValue;
     }
 
