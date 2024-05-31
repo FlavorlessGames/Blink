@@ -130,24 +130,22 @@ public class FlashlightLogic : NetworkBehaviour
     private void batteryLevel()
     {
         if (!_isOn) return;
-        if(_currentBattery > 0f)
+        if (_currentBattery <= 0)
         {
-            _currentBattery -= Time.deltaTime;
-
-            HUDManager.Instance.SetBatteryLevel(100 * _currentBattery / _maxBattery);
-
-            if((_currentBattery < _lowBattery) && !_isFlickering)
-            {
-                StartFlicker();
-            }
+            _isOn = false;
+            _currentBattery = 0f;
             return;
         }
-        _isOn = false;
+        _currentBattery -= Time.deltaTime;
+        HUDManager.Instance.SetBatteryLevel(100 * _currentBattery / _maxBattery);
+        if (_isFlickering) return;
+        if (_currentBattery < _lowBattery) StartFlicker();
     }
 
     private void lightSwitch()
     {
         // AudioManager.instance.PlaySound(flashlightClick);
+        if (_currentBattery < 0) return;
         _isOn = !_isOn;
     }
 
