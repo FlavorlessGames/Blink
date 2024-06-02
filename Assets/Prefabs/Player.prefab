@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4526370939932856203}
   - component: {fileID: 4279754236751612044}
   - component: {fileID: 8224627149085712945}
+  - component: {fileID: 3021828596501593616}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -161,6 +162,7 @@ MonoBehaviour:
   _wideAngle: 80
   _wideRange: 20
   _lerpDuration: 0.3
+  _audio: {fileID: 3021828596501593616}
 --- !u!136 &4526370939932856203
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -209,6 +211,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 5117604304333956524}
+--- !u!114 &3021828596501593616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155698318013265906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c586f060cc72d49845829f3516c6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sounds:
+  - Name: Flashlight Click
+    Clip: {fileID: 8300000, guid: 26b25912cdc34ee44b2c293406b14b7f, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    source: {fileID: 0}
+    SpatialBlend: 1
+    MinDistance: 1
+    MaxDistance: 500
+  - Name: Flashlight Focus
+    Clip: {fileID: 8300000, guid: 78f26311623c9ad41be6fdb98b936d1f, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    source: {fileID: 0}
+    SpatialBlend: 1
+    MinDistance: 1
+    MaxDistance: 500
+  - Name: Flashlight Unfocus
+    Clip: {fileID: 8300000, guid: db59cfbdf9897de4e9a737ebdc0a0e5f, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    source: {fileID: 0}
+    SpatialBlend: 1
+    MinDistance: 1
+    MaxDistance: 500
 --- !u!1 &683245186468301443
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +455,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5117604304333956524}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!1 &7031253980443962521
 GameObject:
   m_ObjectHideFlags: 0

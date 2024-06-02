@@ -6,7 +6,6 @@ using UnityEngine;
 public class StatueMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController _controller;
-    [SerializeField] private float _walkSpeed = 5.0f;
     [SerializeField] private float _height = 1.5f;
     [SerializeField] private float _fallSpeed = 3f;
     [SerializeField] private float _detectionDistance = 100f;

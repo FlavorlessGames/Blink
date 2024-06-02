@@ -19,6 +19,7 @@ public class FlashlightLogic : NetworkBehaviour
     [SerializeField] private float _wideAngle = 100f;
     [SerializeField] private float _wideRange = 20f;
     [SerializeField] private float _lerpDuration = .3f;
+    [SerializeField] private PositionalAudio _audio;
     private bool _on  
     {
         get 
@@ -145,12 +146,14 @@ public class FlashlightLogic : NetworkBehaviour
 
     private void flashlightUnfocus()
     {
+        _audio.Play("Flashlight Unfocus");
         if (_lerpCoroutine != null) StopCoroutine(_lerpCoroutine);
         _lerpCoroutine = StartCoroutine(LerpLight(_wideAngle, _wideRange));
     }
 
     private void flashlightFocus()
     {
+        _audio.Play("Flashlight Focus");
         if (_lerpCoroutine != null) StopCoroutine(_lerpCoroutine);
         _lerpCoroutine = StartCoroutine(LerpLight(_focusAngle, _focusRange));
     }
@@ -185,7 +188,7 @@ public class FlashlightLogic : NetworkBehaviour
 
     private void lightSwitch()
     {
-        // AudioManager.instance.PlaySound(flashlightClick);
+        _audio.Play("Flashlight Click");
         if (_currentBattery < 0) return;
         _turnedOn = !_turnedOn;
     }

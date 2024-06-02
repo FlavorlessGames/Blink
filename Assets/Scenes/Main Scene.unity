@@ -944,7 +944,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 0}
-  _walkSpeed: 3
   _height: 1.5
   _fallSpeed: 3
   _detectionDistance: 100
@@ -1309,9 +1308,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1985264017}
+  - component: {fileID: 1985264021}
   - component: {fileID: 1985264018}
   - component: {fileID: 1985264019}
   - component: {fileID: 1985264020}
+  - component: {fileID: 1985264023}
+  - component: {fileID: 1985264022}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1374,6 +1376,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _batteryText: {fileID: 1776035984}
+--- !u!114 &1985264021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985264016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3410789767
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &1985264022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985264016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11fb4f59c5cefaf4aaf043c198c8f799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sounds:
+  - Name: Siren Song
+    Clip: {fileID: 8300000, guid: 2e1adb345577929418439b530db74379, type: 3}
+    Volume: 0.08
+    Pitch: 1.5
+    source: {fileID: 0}
+--- !u!114 &1985264023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985264016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3a2a593dec5ce54ea81f0d0329c0bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2049089991 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7927249324382619981, guid: 316cd02d0f33a0649ba071f9ba759555, type: 3}
@@ -1414,9 +1467,9 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1985264017}
   - {fileID: 934132894}
   - {fileID: 515277581}
-  - {fileID: 1985264017}
-  - {fileID: 1797745151}
   - {fileID: 511987327}
   - {fileID: 914192875}
+  - {fileID: 1797745151}
