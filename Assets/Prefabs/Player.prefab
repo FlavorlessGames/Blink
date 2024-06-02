@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4526370939932856203}
   - component: {fileID: 4279754236751612044}
   - component: {fileID: 8224627149085712945}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 4055585109952654915}
   - component: {fileID: 6395292472925178199}
   - component: {fileID: 2987222580255107335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4487252494921571053}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: POV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 4788205569048171153}
   - component: {fileID: 8813745848646354245}
   - component: {fileID: 3131843590294333827}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -428,7 +428,7 @@ GameObject:
   - component: {fileID: 8152201005170943425}
   - component: {fileID: 8890060884050211219}
   - component: {fileID: 2581865191114583264}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,7 +510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1437089315364282056}
   - component: {fileID: 916803265524365320}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +603,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4175134896734160929}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

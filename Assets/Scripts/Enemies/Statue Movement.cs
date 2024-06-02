@@ -12,6 +12,7 @@ public class StatueMovement : MonoBehaviour
     [SerializeField] private float _detectionDistance = 100f;
     [SerializeField] private bool _stopped = false;
     [SerializeField] private GameObject _pathIndicator;
+    [SerializeField] private UnityEngine.AI.NavMeshAgent _agent;
     private const int _pathingLevels = 2; // Warning: Do not modify
 
     // Start is called before the first frame update
@@ -27,7 +28,9 @@ public class StatueMovement : MonoBehaviour
     void Update()
     {
         if (_stopped) return;
-        move();
+        Vector3 target = selectTarget();
+        if (target == Vector3.zero) return;
+        move(target);
     }
 
     private void fall()
@@ -47,29 +50,28 @@ public class StatueMovement : MonoBehaviour
         return true;
     }
 
-    private void move()
+    private void move(Vector3 target)
     {
-        if (EntityManager.Instance == null) return;
-        Vector3 direction = getDirection();
-        _controller.Move(direction * _walkSpeed * Time.deltaTime);
+        _agent.SetDestination(target);
     }
 
-    private Vector3 getDirection()
-    {
-        Vector3 direction = new Vector3(0,0,0);
-        Vector3 target = selectTarget();
-        if (target == Vector3.zero) return direction;
-        Vector3 diff = target - transform.position;
-        spawnIndicator(transform.position + diff/2);
-        direction = diff.normalized;
-        return direction;
-    }
+    // private Vector3 getDirection()
+    // {
+    //     Vector3 direction = new Vector3(0,0,0);
+    //     Vector3 target = selectTarget();
+    //     if (target == Vector3.zero) return direction;
+    //     Vector3 diff = target - transform.position;
+    //     spawnIndicator(transform.position + diff/2);
+    //     direction = diff.normalized;
+    //     return direction;
+    // }
 
     private Vector3 selectTarget()
     {
+        Vector3 target = new Vector3(0,0,0);
+        if (EntityManager.Instance == null) return target;
         List<Vector3> possibleTargets = new List<Vector3>();
         Dictionary<Vector3, Path> targetPaths = new Dictionary<Vector3, Path>();
-        Vector3 target = new Vector3(0,0,0);
         foreach (Vector3 position in EntityManager.Instance.GetPlayerPositions())
         {
             if (!Utility.InRange(transform.position, position, _detectionDistance)) continue;
@@ -119,11 +121,13 @@ public class StatueMovement : MonoBehaviour
 
     private void stop()
     {
+        _agent.isStopped = true;
         _stopped = true;
     }
 
     private void resume()
     {
+        _agent.isStopped = false;
         _stopped = false;
     }
 

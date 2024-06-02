@@ -16,4 +16,13 @@ public static class Utility
     {
         return Vector3.Distance(position1, position2) < range;
     }
+    public static List<T> ListCopy<T>(List<T> list)
+    {
+        List<T> newList = new List<T>(); 
+        foreach (T item in list)
+        {
+            newList.Add(item);
+        }
+        return newList;
+    }
 }
