@@ -32,7 +32,6 @@ public class CustomNetworkTransform : NetworkBehaviour
         Vector3 currentPos = transform.position;
         currentPos.x = (float) _x.Value;
         currentPos.z = (float) _z.Value;
-        currentPos.y = currentPos.y;
         transform.position = currentPos;
     }
 

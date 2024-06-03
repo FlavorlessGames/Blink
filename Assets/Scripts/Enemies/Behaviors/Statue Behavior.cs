@@ -7,7 +7,7 @@ public class StatueBehavior : MonoBehaviour
     [SerializeField] protected EnemyMode _mode;
     protected StatueBase _base;
 
-    void Start()
+    protected virtual void Start()
     {
         _base = GetComponent<StatueBase>();
         if (_base == null) Debug.LogError("Statue Base not assigned");
@@ -35,7 +35,7 @@ public class StatueBehavior : MonoBehaviour
         _base.Resume();
     }
 
-    protected void pursueTarget()
+    protected virtual void pursueTarget()
     {
         Vector3 target = selectTarget();
         if (target == Vector3.zero) return;
@@ -49,7 +49,7 @@ public class StatueBehavior : MonoBehaviour
         _base.Stop();
     }
 
-    private List<Vector3> targetsInRange()
+    protected virtual List<Vector3> targetsInRange()
     {
         List<Vector3> targets = new List<Vector3>();
         foreach (Vector3 position in EntityManager.Instance.GetPlayerPositions())
@@ -60,7 +60,7 @@ public class StatueBehavior : MonoBehaviour
         return targets;
     }
 
-    private Vector3 selectTarget()
+    protected Vector3 selectTarget()
     {
         Vector3 target = new Vector3(0,0,0);
         if (EntityManager.Instance == null) return target;
@@ -71,7 +71,7 @@ public class StatueBehavior : MonoBehaviour
         return target;
     }
 
-    private Vector3 closest(Vector3 start, Vector3 pos1, Vector3 pos2)
+    protected Vector3 closest(Vector3 start, Vector3 pos1, Vector3 pos2)
     {
         if (pos1 == Vector3.zero) return pos2;
         if (pos2 == Vector3.zero) return pos1;
