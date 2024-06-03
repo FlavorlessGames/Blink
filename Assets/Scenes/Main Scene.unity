@@ -1129,7 +1129,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1596560602}
-  - component: {fileID: 1596560603}
   - component: {fileID: 1596560606}
   - component: {fileID: 1596560605}
   - component: {fileID: 1596560608}
@@ -1137,6 +1136,8 @@ GameObject:
   - component: {fileID: 1596560610}
   - component: {fileID: 1596560611}
   - component: {fileID: 1596560612}
+  - component: {fileID: 1596560613}
+  - component: {fileID: 1596560614}
   m_Layer: 6
   m_Name: Statue
   m_TagString: Untagged
@@ -1160,23 +1161,6 @@ Transform:
   - {fileID: 360763461}
   m_Father: {fileID: 515277581}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1596560603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1596560601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7914469f56d479e40a85db932cc97d8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _controller: {fileID: 0}
-  _detectionDistance: 100
-  _stopped: 0
-  _pathIndicator: {fileID: 8477640378176174440, guid: 5a113dd80186b49498892d19d13cee23, type: 3}
-  _agent: {fileID: 1596560612}
 --- !u!114 &1596560605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1311,6 +1295,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1596560613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596560601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58ee9e4b3721d1f4ea3414c5c9138452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mode: 0
+--- !u!114 &1596560614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596560601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d54496159eb61bb4d8ac1f4fddee166c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _detectionDistance: 15
+  _agent: {fileID: 1596560612}
 --- !u!1 &1683986795
 GameObject:
   m_ObjectHideFlags: 0

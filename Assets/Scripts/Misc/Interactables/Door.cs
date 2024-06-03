@@ -37,7 +37,6 @@ public class Door : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void openCloseRpc()
     {
-        Debug.Log("Open/close");
         TransformData tdata= new TransformData(_open ? _closedPosition : _openPosition);
         float duration = _timer < _animationTime ? _timer : _animationTime;
 
