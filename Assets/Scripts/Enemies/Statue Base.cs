@@ -23,7 +23,10 @@ public class StatueBase : MonoBehaviour
 
     public void Stop()
     {
+        _agent.velocity = Vector3.zero;
+        _agent.ResetPath();
         _agent.isStopped = true;
+        // _agent.Sleep();
     }
 
     public void Resume()
@@ -34,10 +37,5 @@ public class StatueBase : MonoBehaviour
     public void SetDestination(Vector3 destination)
     {
         _agent.SetDestination(destination);
-    }
-
-    public void Reset()
-    {
-        _agent.ResetPath();
     }
 }

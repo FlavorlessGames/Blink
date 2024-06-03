@@ -2,7 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Collections.Generic;
 
-public class StatueBehavior : NetworkBehaviour
+public class StatueBehavior : MonoBehaviour
 {
     [SerializeField] protected EnemyMode _mode;
     protected StatueBase _base;
@@ -18,10 +18,10 @@ public class StatueBehavior : NetworkBehaviour
         modeBranch();
     }
 
-    public override void OnNetworkSpawn() 
-    {
-        if (!IsServer) enabled = false;
-    }
+    // public override void OnNetworkSpawn() 
+    // {
+    //     if (!IsServer) enabled = false;
+    // }
 
     protected virtual void modeBranch()
     {
@@ -39,14 +39,13 @@ public class StatueBehavior : NetworkBehaviour
     {
         Vector3 target = selectTarget();
         if (target == Vector3.zero) return;
-        setDestinationRpc(target);
+        _base.SetDestination(target);
     }
 
     protected void idleIfOutOfRange()
     {
         if (targetsInRange().Count > 0) return;
         _mode = EnemyMode.Idle;
-        _base.Reset();
         _base.Stop();
     }
 
@@ -81,9 +80,9 @@ public class StatueBehavior : NetworkBehaviour
         return distance1 < distance2 ? pos1 : pos2;
     }
 
-    [Rpc(SendTo.Everyone)]
-    private void setDestinationRpc(Vector3 destination)
-    {
-        _base.SetDestination(destination);
-    }
+    // [Rpc(SendTo.Everyone)]
+    // private void setDestinationRpc(Vector3 destination)
+    // {
+    //     _base.SetDestination(destination);
+    // }
 }
