@@ -1134,12 +1134,12 @@ GameObject:
   - component: {fileID: 1596560610}
   - component: {fileID: 1596560611}
   - component: {fileID: 1596560612}
+  - component: {fileID: 1596560618}
+  - component: {fileID: 1596560617}
   - component: {fileID: 1596560613}
   - component: {fileID: 1596560614}
   - component: {fileID: 1596560615}
   - component: {fileID: 1596560616}
-  - component: {fileID: 1596560617}
-  - component: {fileID: 1596560618}
   m_Layer: 6
   m_Name: Statue
   m_TagString: Untagged
@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596560601}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58ee9e4b3721d1f4ea3414c5c9138452, type: 3}
   m_Name: 
@@ -1271,7 +1271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54496159eb61bb4d8ac1f4fddee166c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detectionDistance: 15
+  _detectionDistance: 50
   _agent: {fileID: 1596560612}
 --- !u!114 &1596560615
 MonoBehaviour:
@@ -1314,7 +1314,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596560601}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b24f6589ba9b943bbde7892e936e63, type: 3}
   m_Name: 
@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596560601}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54a64c895fff53b42b241e3a0f6a3624, type: 3}
   m_Name: 
