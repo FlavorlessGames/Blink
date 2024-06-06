@@ -45,7 +45,7 @@ public class MultiplayerUI : MonoBehaviour
         connectButtons = uiDocument.rootVisualElement.Q<VisualElement>(id_ConnectButtons);
     }
 
-    async void startGame()
+    void startGame()
     {
         if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer) return;
         uiDocument.enabled = false;

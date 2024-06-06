@@ -6,6 +6,7 @@ public class FocusBeamReceiver : MonoBehaviour
     public float Range { get { return _range; } }
     public float ChargePercentage { get { return getChargePercent(); } }
     public float SinceTargeted { get { return Time.time - _targeted; } }
+    public event GenericHandler FullChargeEvent;
     [Range(1f, 100f)]
     [SerializeField] private float _range = 10f;
     [Range(.01f, 5f)]
@@ -14,6 +15,7 @@ public class FocusBeamReceiver : MonoBehaviour
     [SerializeField] private float _decayDelay;
     private float _targeted;
     private float _charge;
+    private bool _dinged;
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class FocusBeamReceiver : MonoBehaviour
     void Update()
     {
         decay();
+        fullyChargedCheck();
     }
 
     public void Target()
@@ -37,6 +40,7 @@ public class FocusBeamReceiver : MonoBehaviour
     {
         if (SinceTargeted < _decayDelay) return;
 
+        _dinged = false;
         _charge -= Time.deltaTime;
         if (_charge < 0) _charge = 0f;
     }
@@ -45,4 +49,14 @@ public class FocusBeamReceiver : MonoBehaviour
     {
         return Math.Min(100f, _charge/_chargeMax) * 100f;
     }
+
+    private void fullyChargedCheck()
+    {
+        if (_dinged) return;
+        if (ChargePercentage < 100) return;
+        _dinged = true;
+        FullChargeEvent?.Invoke();
+    }
+
+    public delegate void GenericHandler();
 }
