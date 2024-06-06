@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Stylesheets/Basic%20Relay%20Page%20Style.uss?fileID=7433441132597879392&amp;guid=a23885d0a8f2cc54ebee19ba1d15ae07&amp;type=3#Basic Relay Page Style" />
+    <ui:VisualElement name="ConnectButtons">
+        <ui:Button text="Create" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CreateButton" />
+        <ui:Button text="Join" parse-escape-sequences="true" display-tooltip-when-elided="true" name="JoinButton" />
+    </ui:VisualElement>
+    <ui:VisualElement name="Relay" style="flex-grow: 1;">
+        <ui:TextField picking-mode="Ignore" name="CodeInput" style="flex-direction: column; min-width: 155px;" />
+        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CodeLabel" style="font-size: 24px;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="StartGame" style="flex-grow: 1;">
+        <ui:Button text="Start Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartGameButton" />
+    </ui:VisualElement>
+</ui:UXML>
