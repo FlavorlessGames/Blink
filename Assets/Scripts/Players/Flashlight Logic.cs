@@ -9,6 +9,7 @@ public class FlashlightLogic : NetworkBehaviour
     // public AudioClip flashlightWiden;
     // public AudioClip flashlightClick;
     [SerializeField] private Light _flashlight;
+    [SerializeField] private Camera _cam;
     [SerializeField] private float _flickerInterval = .2f;
     [SerializeField] private float _maxBattery = 50f;
     [SerializeField] private float _lowBattery = 10f;
@@ -104,7 +105,7 @@ public class FlashlightLogic : NetworkBehaviour
     private void Update()
     {
         UpdateLight();
-        lightRayCast();
+        castFocusedBeam();
         if (!IsOwner) return;
         batteryLevel();
         if (_flickering) flicker();
@@ -236,44 +237,22 @@ public class FlashlightLogic : NetworkBehaviour
         _flashlight.range = _currentRange;
     }
 
-    // Todo: Separate this so it can apply to other light sources
-    private void lightRayCast()
+    private void castFocusedBeam()
     {
-        if (!_flashlight.enabled) return;
-        if (EntityManager.Instance == null) return;
-        foreach(Vector3 enemyPosition in EntityManager.Instance.GetEnemyPositions())
-        {
-            detectWithLight(enemyPosition);
-        }
-    }
+        if (!_on) return;
+        if (_currentAngle != _focusAngle) return;
 
-    private void detectWithLight(Vector3 enemyPosition)
-    {
-        if (!inFlashlightCone(enemyPosition)) return;
-        LightDetection detectable = rayCastCheck(enemyPosition);
-        if (detectable == null) return;
-        detectable.Spotted();
-    }
-
-    private bool inFlashlightCone(Vector3 enemyPosition)
-    {
-        if (Vector3.Distance(_flashlight.transform.position, enemyPosition) > _currentRange) return false;
-        Vector3 point1 = _flashlight.transform.forward;
-        Vector3 point2 = enemyPosition - _flashlight.transform.position;
-        if (Vector3.Angle(point1, point2) > _flashlight.spotAngle / 2f) return false;
-        return true;
-    }
-
-    private LightDetection rayCastCheck(Vector3 enemyPosition)
-    {
-        Vector3 direction = (enemyPosition - _flashlight.transform.position).normalized;
-        Ray ray = new Ray(_flashlight.transform.position, direction);
+        var screenCenter = new Vector3(Screen.width/2, Screen.height/2, 0);        
+        Ray ray = _cam.ScreenPointToRay(screenCenter);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            LightDetection lightDetection = hit.transform.GetComponent<LightDetection>();
-            return lightDetection;
+            FocusBeamReceiver receiver = hit.collider.gameObject.GetComponent<FocusBeamReceiver>();
+            if (receiver != null && Utility.InRange(hit.point, transform.position, receiver.Range))
+            {
+                receiver.Target();
+                return;
+            }
         }
-        return null;
     }
 }

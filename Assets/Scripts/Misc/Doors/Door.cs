@@ -6,36 +6,32 @@ using Unity.Netcode;
 public class Door : NetworkBehaviour
 {
     [SerializeField] private bool _open;
+    [Range(0.1f, 5f)]
     [SerializeField] private float _animationTime = 0.5f;
     [SerializeField] private Transform _openPosition;
     [SerializeField] private Transform _closedPosition;
     [SerializeField] private GameObject _door;
-    [SerializeField] private List<Interactable> _switches;
     private float _timer;
     private Coroutine _lerpCoroutine;
     // Start is called before the first frame update
     void Start()
     {
         _timer = _animationTime;
-        foreach (Interactable i in _switches)
-        {
-            i.InteractEvent += openClose;
-        }
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public void Open()
     {
-        
+        if (_open) return;
+        OpenClose();
     }
 
-    private void openClose(PlayerInteraction player)
+    public void Close()
     {
-        openCloseRpc();
+        if (!_open) return;
+        OpenClose();
     }
 
-    [Rpc(SendTo.Server)]
-    private void openCloseRpc()
+    public void OpenClose()
     {
         TransformData tdata= new TransformData(_open ? _closedPosition : _openPosition);
         float duration = _timer < _animationTime ? _timer : _animationTime;
@@ -63,11 +59,19 @@ public class Door : NetworkBehaviour
             float y = Mathf.Lerp(from.rotation.y, to.rotation.y, t);
             float z = Mathf.Lerp(from.rotation.z, to.rotation.z, t);
 
-            _door.transform.position = new Vector3(posx, posy, posz);
-            _door.transform.rotation = new Quaternion(x, y, z, w);
+            var position = new Vector3(posx, posy, posz);
+            var rotation = new Quaternion(x, y, z, w);
+            setTransformRpc(position, rotation);
 
             yield return null;
         }
+    }
+
+    [Rpc(SendTo.Server)]
+    private void setTransformRpc(Vector3 position, Quaternion rotation)
+    {
+        _door.transform.position = position;
+        _door.transform.rotation = rotation;
     }
 
 

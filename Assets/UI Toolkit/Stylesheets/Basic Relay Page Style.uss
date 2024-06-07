@@ -1,0 +1,45 @@
+Button {
+    color: rgb(65, 65, 65);
+    opacity: 1;
+    width: 155px;
+    align-self: center;
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    border-top-width: 15px;
+    border-right-width: 15px;
+    border-bottom-width: 15px;
+    border-left-width: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+TextField {
+    width: auto;
+    align-self: center;
+}
+
+#ConnectButtons {
+    justify-content: center;
+    flex-direction: column;
+}
+
+#Relay {
+    justify-content: center;
+}
+
+Label {
+    align-self: center;
+    color: rgb(255, 255, 255);
+}
+
+#Code {
+    font-size: 20px;
+}
+
+#StartGame {
+    justify-content: center;
+}
