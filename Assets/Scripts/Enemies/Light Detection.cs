@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightDetection : MonoBehaviour
 {
-    [SerializeField] private float _waitTime = .05f;
+    [SerializeField] private float _waitTime = .1f;
     public event GenericHandler SpottedEvent;
     public event GenericHandler EyesAvertedEvent;
     private float _timer;
