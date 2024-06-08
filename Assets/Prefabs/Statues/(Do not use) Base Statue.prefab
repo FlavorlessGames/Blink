@@ -97,14 +97,11 @@ GameObject:
   - component: {fileID: 8021116784003869699}
   - component: {fileID: 9079946551599995906}
   - component: {fileID: 1856899502912529933}
-  - component: {fileID: 2001493618053308961}
-  - component: {fileID: 7922384745216833102}
-  - component: {fileID: 3326327828380140551}
   - component: {fileID: 3151505688000879494}
   - component: {fileID: 3840076414405174261}
   - component: {fileID: 8512041060633185047}
   m_Layer: 6
-  m_Name: Base Statue
+  m_Name: (Do not use) Base Statue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,8 +194,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3
-  m_Acceleration: 8
+  m_Speed: 5
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -209,45 +206,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2001493618053308961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8465262955872474939}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a64c895fff53b42b241e3a0f6a3624, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mode: 1
---- !u!114 &7922384745216833102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8465262955872474939}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b24f6589ba9b943bbde7892e936e63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mode: 0
---- !u!114 &3326327828380140551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8465262955872474939}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58ee9e4b3721d1f4ea3414c5c9138452, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mode: 0
 --- !u!114 &3151505688000879494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54496159eb61bb4d8ac1f4fddee166c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detectionDistance: 50
+  _detectionDistance: 100
   _agent: {fileID: 1856899502912529933}
 --- !u!114 &3840076414405174261
 MonoBehaviour:
@@ -274,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 571848619
+  GlobalObjectIdHash: 684079174
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1

@@ -4,7 +4,7 @@ public class LightSource : MonoBehaviour
 {
     [SerializeField] private Light _light;
     void Update()
-    {
+    { 
         lightRayCast();
     }
 
