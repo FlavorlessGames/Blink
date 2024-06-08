@@ -6,9 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Scene.unity
+    path: Assets/Scenes/Multiplayer Scenes/Main Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/TestLevel1.unity
     guid: c4c99a306cbf74174b7be9bd73748d62
+  - enabled: 1
+    path: Assets/Scenes/Singleplayer Scenes/Scene Template.unity
+    guid: 4449ff02eee795c49b0eeacb4ac26ee3
+  - enabled: 1
+    path: Assets/Scenes/Singleplayer Scenes/Giacomo TestScene.unity
+    guid: 4263d016f1b6a4fd99df8e7fa33c9bf8
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer Scenes/Auth.unity
+    guid: 67b1b1b9ca36b5f4ca6f58696a880552
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer Scenes/Multiplayer Menu.unity
+    guid: 8bdab783eb8874d4eb9400cb0793f111
   m_configObjects: {}
