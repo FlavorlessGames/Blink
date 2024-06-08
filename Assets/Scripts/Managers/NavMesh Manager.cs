@@ -39,13 +39,14 @@ public class NavMeshManager : MonoBehaviour
 
     private void removeCurrent()
     {
-        try
-        {
-            _current.Remove();
-        }
-        catch
-        {
-            return;
-        }
+        NavMesh.RemoveAllNavMeshData();
+        // try
+        // {
+        //     _current.Remove();
+        // }
+        // catch
+        // {
+        //     return;
+        // }
     }
 }
