@@ -12,7 +12,7 @@ NavMeshProjectSettings:
   - name: Jump
     cost: 2
   - name: Illuminated
-    cost: 1
+    cost: 15
   - name: Dark
     cost: 1
   - name: 

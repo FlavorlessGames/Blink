@@ -5,7 +5,36 @@ public class LightSource : MonoBehaviour
     [SerializeField] private Light _light;
     void Update()
     { 
-        lightRayCast();
+        switch (_light.type)
+        {
+            case LightType.Spot:
+                lightRayCast();
+                break;
+            case LightType.Point:
+                pointLight();
+                break;
+            default:
+                Debug.LogError("This Light Type is not supported");
+                return;
+        }
+    }
+
+    private void pointLight()
+    {
+        Debug.Log("point light");
+        if (!_light.enabled) return;
+        if (EntityManager.Instance == null) return;
+        foreach(Vector3 enemyPosition in EntityManager.Instance.GetEnemyPositions())
+        {
+            detectWithLightPoint(enemyPosition);
+        }
+    }
+
+    private void detectWithLightPoint(Vector3 enemyPosition)
+    {
+        LightDetection detectable = rayCastCheck(enemyPosition);
+        if (detectable == null) return;
+        detectable.Spotted();
     }
 
     // Todo: Separate this so it can apply to other light sources

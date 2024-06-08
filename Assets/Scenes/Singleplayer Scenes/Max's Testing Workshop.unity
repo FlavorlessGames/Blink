@@ -766,6 +766,7 @@ GameObject:
   - component: {fileID: 819506565}
   - component: {fileID: 819506566}
   - component: {fileID: 819506567}
+  - component: {fileID: 819506568}
   m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
@@ -862,8 +863,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Size: {x: 11.147919, y: 3.2903903, z: 11.138948}
-  m_Center: {x: -3.5739594, y: 1.1451951, z: 3.5694742}
+  m_Size: {x: 20, y: 20, z: 20}
+  m_Center: {x: 0, y: 0, z: 0}
   m_Area: 0
   m_AffectedAgents: ffffffff
 --- !u!114 &819506567
@@ -881,6 +882,19 @@ MonoBehaviour:
   _light: {fileID: 819506565}
   _modifier: {fileID: 819506566}
   _on: 1
+--- !u!114 &819506568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819506563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d7f4881f0fd3f45bfc932a3a5ad796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _light: {fileID: 819506565}
 --- !u!1 &1071713076 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4866763859945140080, guid: d2595267f7219422b8df9e0192e83a55, type: 3}
