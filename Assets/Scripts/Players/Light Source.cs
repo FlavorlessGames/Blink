@@ -19,9 +19,10 @@ public class LightSource : MonoBehaviour
         }
     }
 
+    // Todo: refactor for cleaner code
+    
     private void pointLight()
     {
-        Debug.Log("point light");
         if (!_light.enabled) return;
         if (EntityManager.Instance == null) return;
         foreach(Vector3 enemyPosition in EntityManager.Instance.GetEnemyPositions())
@@ -32,12 +33,12 @@ public class LightSource : MonoBehaviour
 
     private void detectWithLightPoint(Vector3 enemyPosition)
     {
+        if (!Utility.InRange(transform.position, enemyPosition, _light.range)) return;
         LightDetection detectable = rayCastCheck(enemyPosition);
         if (detectable == null) return;
         detectable.Spotted();
     }
 
-    // Todo: Separate this so it can apply to other light sources
     private void lightRayCast()
     {
         if (!_light.enabled) return;

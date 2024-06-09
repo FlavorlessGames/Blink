@@ -8,6 +8,8 @@ public class Lantern : MonoBehaviour
     [SerializeField] private Light _light;
     [SerializeField] private NavMeshModifierVolume _modifier;
     [SerializeField] private bool _on;
+    [Range(1f, 300f)]
+    [SerializeField] private float _illuminateDuration = 1f;
     private float _timer = 0f;
     private int _id;
     private static List<bool> _lanternStates;
@@ -24,12 +26,19 @@ public class Lantern : MonoBehaviour
         _lanternStates.Add(_on);
     }
 
+    void Start()
+    {
+        FocusBeamReceiver receiver = GetComponent<FocusBeamReceiver>();
+        receiver.FullChargeEvent += on;
+    }
+
     void Update()
     {
-        _timer += Time.deltaTime;
-        if (_timer < 2f) return;
+        if (_timer <= 0f) return;
+        _timer -= Time.deltaTime;
 
-        OnOffSwitch();
+        if (_timer > 0f) return;
+        off();
         _timer = 0f;
 
     }
@@ -50,6 +59,7 @@ public class Lantern : MonoBehaviour
     private void on()
     {
         _on = true;
+        _timer = _illuminateDuration;
         _lanternStates[_id] = _on;
         _light.enabled = true;
         _modifier.area = NavMesh.GetAreaFromName("Illuminated");
