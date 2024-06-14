@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.maxnibler.levelbuilder": {
+      "version": "https://github.com/maxnibler/Unity-Level-Builder.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1678aad8e736fd22be52af52d92cba3dc3abd8b7"
+    },
     "com.unity.2d.tilemap": {
       "version": "1.0.0",
       "depth": 0,
