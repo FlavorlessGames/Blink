@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 258b47b506ffa8a43ac81472bceef5b6, type: 3}
-  m_Name: Prefab Brush
+  m_Name: FloorTile (GreyBox)
   m_EditorClassIdentifier: 
   m_Cells:
-  - m_GameObject: {fileID: 6499502657325670877, guid: 04cc8d7e36fce5340ad1e4f0e616f899, type: 3}
+  - m_GameObject: {fileID: 2476738133081477361, guid: 7ef2628106ecc4d5289df0a3da4fd0ff, type: 3}
     m_Offset: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     m_Orientation: {x: 0, y: 0, z: 0, w: 1}
-  - m_GameObject: {fileID: 2329293304500715468, guid: d2be90d03919cca41adced498c97e5ea, type: 3}
-    m_Offset: {x: 4, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 1}
-    m_Orientation: {x: 0, y: 0, z: 0, w: 1}
-  m_Size: {x: 4, y: 4, z: 4}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Pivot: {x: 0, y: 0, z: 0}
   m_CanChangeZPosition: 0
   hiddenGridLayout:

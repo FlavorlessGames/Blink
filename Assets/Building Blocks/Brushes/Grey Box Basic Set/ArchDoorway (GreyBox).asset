@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 258b47b506ffa8a43ac81472bceef5b6, type: 3}
+  m_Name: ArchDoorway (GreyBox)
+  m_EditorClassIdentifier: 
+  m_Cells:
+  - m_GameObject: {fileID: 556698474010005295, guid: dcefbfced253f4bbbb83f59860e46e62, type: 3}
+    m_Offset: {x: 1.42, y: 0, z: 0}
+    m_Scale: {x: 200, y: 200, z: 24}
+    m_Orientation: {x: 0.70710677, y: 0.70710677, z: -0.00000003090862, w: -0.00000003090862}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Pivot: {x: 0, y: 0, z: 0}
+  m_CanChangeZPosition: 0
+  hiddenGridLayout:
+    cellSize: {x: 1, y: 1, z: 1}
+    cellGap: {x: 0, y: 0, z: 0}
+    cellLayout: 0
+    cellSwizzle: 0
+  hiddenGrid: {fileID: 0}
+  m_Anchor: {x: 0.5, y: 0, z: 0}
