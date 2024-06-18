@@ -28,4 +28,10 @@ public class BatteryPack : NetworkBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    public void Toss(Vector3 direction)
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(direction * 5f, ForceMode.Impulse);
+    }
 }

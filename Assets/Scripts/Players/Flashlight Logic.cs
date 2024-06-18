@@ -114,8 +114,10 @@ public class FlashlightLogic : NetworkBehaviour
         if (_batteryPacks <= 0) return;
 
         _batteryPacks--;
-        GameObject go = Instantiate(BatteryPackPrefab, transform.position, new Quaternion(0,0,0,0));
+        Vector3 placement = transform.position + transform.forward * 2 + transform.up;
+        GameObject go = Instantiate(BatteryPackPrefab, placement, new Quaternion(0,0,0,0));
         NetworkObject no = go.GetComponent<NetworkObject>();
+        go.GetComponent<BatteryPack>().Toss(transform.forward);
         no.Spawn();
     }
 
