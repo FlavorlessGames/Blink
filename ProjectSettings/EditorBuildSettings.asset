@@ -24,6 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Singleplayer Scenes/Example Scene.unity
     guid: aa0df26f820e04e4e9fb6863adafc665
   - enabled: 1
-    path: Assets/Scenes/Singleplayer Scenes/Giacomo Levels/Giacomo TestScene.unity
+    path: Assets/Scenes/Singleplayer Scenes/Giacomo Levels/TestLevelTiling.unity
     guid: 4263d016f1b6a4fd99df8e7fa33c9bf8
   m_configObjects: {}
