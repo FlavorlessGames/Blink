@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+[RequireComponent(typeof(FlashlightStats))]
 public class FlashlightLogic : NetworkBehaviour
 {
     // public AudioClip flashlightFocus;
@@ -10,97 +11,21 @@ public class FlashlightLogic : NetworkBehaviour
     // public AudioClip flashlightClick;
     [SerializeField] private Light _flashlight;
     [SerializeField] private Camera _cam;
-    [SerializeField] private float _flickerInterval = .2f;
-    [SerializeField] private float _maxBattery = 50f;
-    [SerializeField] private float _lowBattery = 10f;
-
-    [SerializeField] private float _focusAngle = 30f;
-    [SerializeField] private float _focusRange = 85f;
-
-    [SerializeField] private float _wideAngle = 100f;
-    [SerializeField] private float _wideRange = 20f;
-    [SerializeField] private float _lerpDuration = .3f;
     [SerializeField] private PositionalAudio _audio;
-    private bool _on  
-    {
-        get 
-        { 
-            if (_forcedOff) return false;
-            return _turnedOn;
-        }
-        set { _turnedOn = value; }
-    }
-    private bool _turnedOn  
-    {
-        get { return IsOwner ? _localTurnedOn : _networkTurnedOn.Value; }
-        set 
-        {
-            _localTurnedOn = value;
-            setTurnedOnRpc(value);
-        }
-    }
-    private bool _localTurnedOn;
-    private NetworkVariable<bool> _networkTurnedOn = new NetworkVariable<bool>();
-    private bool _forcedOff  
-    {
-        get { return IsOwner ? _localForcedOff : _networkForcedOff.Value; }
-        set 
-        {
-            _localForcedOff = value;
-            setForcedOffRpc(value);
-        }
-    }
-    private bool _localForcedOff;
-    private NetworkVariable<bool> _networkForcedOff = new NetworkVariable<bool>();
-    private float _currentBattery 
-    {
-        get { return IsOwner ? _localBattery : _networkBattery.Value; }
-        set 
-        {
-            _localBattery = value;
-            setBatteryRpc(value);
-        }
-    }
-    private float _localBattery;
-    private NetworkVariable<float> _networkBattery = new NetworkVariable<float>();
-    private float _currentAngle 
-    {
-        get { return IsOwner ? _localAngle : _networkAngle.Value; }
-        set 
-        {
-            _localAngle = value;
-            setAngleRpc(value);
-        }
-    }
-    private float _localAngle;
-    private NetworkVariable<float> _networkAngle = new NetworkVariable<float>();
-    private float _currentRange 
-    {
-        get { return IsOwner ? _localRange : _networkRange.Value; }
-        set 
-        {
-            _localRange = value;
-            setRangeRpc(value);
-        }
-    }
-    private float _localRange;
-    private NetworkVariable<float> _networkRange = new NetworkVariable<float>();
     private bool _flickering = false;
     private float _flickerTimer;
     private int _batteryPacks = 0;
     private Coroutine _lerpCoroutine;
-
+    private FlashlightStats _stats;
     private void Start()
     {
-        _currentBattery = _maxBattery;
-        _currentRange = _wideRange;
-        _currentAngle = _wideAngle;
+        _stats = GetComponent<FlashlightStats>();
     }
 
     public override void OnNetworkSpawn() 
     {
         if (!IsOwner) return;
-        _turnedOn = true;
+        _stats.TurnedOn = true;
     }
 
     private void Update()
@@ -117,53 +42,24 @@ public class FlashlightLogic : NetworkBehaviour
         if (Input.GetButtonDown("Recharge")) chargeBattery();
     }
 
-    [Rpc(SendTo.Server)]
-    private void setBatteryRpc(float batteryValue)
-    {
-        _networkBattery.Value = batteryValue;
-    }
-
-    [Rpc(SendTo.Server)]
-    private void setTurnedOnRpc(bool onValue)
-    {
-        _networkTurnedOn.Value = onValue;
-    }
-
-    [Rpc(SendTo.Server)]
-    private void setForcedOffRpc(bool onValue)
-    {
-        _networkForcedOff.Value = onValue;
-    }
-
-    [Rpc(SendTo.Server)]
-    private void setRangeRpc(float rangeValue)
-    {
-        _networkRange.Value = rangeValue;
-    }
-
-    [Rpc(SendTo.Server)]
-    private void setAngleRpc(float angleValue)
-    {
-        _networkAngle.Value = angleValue;
-    }
 
     private void flashlightUnfocus()
     {
         _audio.Play("Flashlight Unfocus");
         if (_lerpCoroutine != null) StopCoroutine(_lerpCoroutine);
-        _lerpCoroutine = StartCoroutine(LerpLight(_wideAngle, _wideRange));
+        _lerpCoroutine = StartCoroutine(LerpLight(_stats.WideAngle, _stats.WideRange));
     }
 
     private void flashlightFocus()
     {
         _audio.Play("Flashlight Focus");
         if (_lerpCoroutine != null) StopCoroutine(_lerpCoroutine);
-        _lerpCoroutine = StartCoroutine(LerpLight(_focusAngle, _focusRange));
+        _lerpCoroutine = StartCoroutine(LerpLight(_stats.FocusAngle, _stats.FocusRange));
     }
 
     private void batteryLevel()
     {
-        if (!_turnedOn) return;
+        if (!_stats.TurnedOn) return;
         if (outOfBattery()) return;
         updateBatteryLevel();
         checkFlickering();
@@ -172,36 +68,36 @@ public class FlashlightLogic : NetworkBehaviour
     private void checkFlickering()
     {
         if (_flickering) return;
-        if (_currentBattery < _lowBattery) _flickering = true;
+        if (_stats.CurrentBattery < _stats.LowBattery) _flickering = true;
     }
 
     private bool outOfBattery()
     {
-        if (_currentBattery > 0) return false;
-        _forcedOff = true;
-        _currentBattery = 0f;
+        if (_stats.CurrentBattery > 0) return false;
+        _stats.ForcedOff = true;
+        _stats.CurrentBattery = 0f;
         return true;
     }
 
     private void updateBatteryLevel()
     {
-        _currentBattery -= Time.deltaTime;
-        HUDManager.Instance.SetBatteryLevel(100 * _currentBattery / _maxBattery);
+        _stats.CurrentBattery -= Time.deltaTime;
+        HUDManager.Instance.SetBatteryLevel(100 * _stats.CurrentBattery / _stats.MaxBattery);
     }
 
     private void lightSwitch()
     {
         _audio.Play("Flashlight Click");
-        if (_currentBattery < 0) return;
-        _turnedOn = !_turnedOn;
+        if (_stats.CurrentBattery < 0) return;
+        _stats.TurnedOn = !_stats.TurnedOn;
     }
 
     private void flicker()
     {
         _flickerTimer -= Time.deltaTime;
         if (_flickerTimer > 0) return;
-        _forcedOff = !_forcedOff;
-        _flickerTimer = _flickerInterval;
+        _stats.ForcedOff = !_stats.ForcedOff;
+        _flickerTimer = _stats.FlickerInterval;
     }
 
     public void PickupBattery()
@@ -214,9 +110,9 @@ public class FlashlightLogic : NetworkBehaviour
     {
         if (!sufficientBatteryPacksCheck()) return;
         _batteryPacks--;
-        _currentBattery = _maxBattery;
+        _stats.CurrentBattery = _stats.MaxBattery;
         _flickering = false;
-        _forcedOff = false;
+        _stats.ForcedOff = false;
     }
 
     private bool sufficientBatteryPacksCheck()
@@ -228,36 +124,36 @@ public class FlashlightLogic : NetworkBehaviour
 
     private IEnumerator LerpLight(float targetAngle, float targetRange)
     {
-        float initialAngle = _currentAngle;
-        float initialRange = _currentRange;
+        float initialAngle = _stats.CurrentAngle;
+        float initialRange = _stats.CurrentRange;
         float elapsedTime = 0f;
 
-        while (elapsedTime < _lerpDuration)
+        while (elapsedTime < _stats.LerpDuration)
         {
             elapsedTime += Time.deltaTime;
-            float t = elapsedTime / _lerpDuration;
+            float t = elapsedTime / _stats.LerpDuration;
 
-            _currentAngle = Mathf.Lerp(initialAngle, targetAngle, t);
-            _currentRange = Mathf.Lerp(initialRange, targetRange, t);
+            _stats.CurrentAngle = Mathf.Lerp(initialAngle, targetAngle, t);
+            _stats.CurrentRange = Mathf.Lerp(initialRange, targetRange, t);
 
             yield return null;
         }
 
-        _currentAngle = targetAngle;
-        _currentRange = targetRange;
+        _stats.CurrentAngle = targetAngle;
+        _stats.CurrentRange = targetRange;
     }
 
     private void UpdateLight()
     {
-        _flashlight.enabled = _on;
-        _flashlight.spotAngle = _currentAngle;
-        _flashlight.range = _currentRange;
+        _flashlight.enabled = _stats.On;
+        _flashlight.spotAngle = _stats.CurrentAngle;
+        _flashlight.range = _stats.CurrentRange;
     }
 
     private void castFocusedBeam()
     {
-        if (!_on) return;
-        if (_currentAngle != _focusAngle) return;
+        if (!_stats.On) return;
+        if (_stats.CurrentAngle != _stats.FocusAngle) return;
 
         var screenCenter = new Vector3(Screen.width/2, Screen.height/2, 0);        
         Ray ray = _cam.ScreenPointToRay(screenCenter);
