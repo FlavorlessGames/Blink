@@ -87,6 +87,7 @@ public class FlashlightLogic : NetworkBehaviour
     private NetworkVariable<float> _networkRange = new NetworkVariable<float>();
     private bool _flickering = false;
     private float _flickerTimer;
+    private int _batteryPacks = 0;
     private Coroutine _lerpCoroutine;
 
     private void Start()
@@ -113,6 +114,7 @@ public class FlashlightLogic : NetworkBehaviour
         if (Input.GetButtonDown("Flashlight Button")) lightSwitch();
         if (Input.GetButtonDown("Flashlight Focus")) flashlightFocus();
         if (Input.GetButtonUp("Flashlight Focus")) flashlightUnfocus();
+        if (Input.GetButtonDown("Recharge")) chargeBattery();
     }
 
     [Rpc(SendTo.Server)]
@@ -202,11 +204,26 @@ public class FlashlightLogic : NetworkBehaviour
         _flickerTimer = _flickerInterval;
     }
 
-    public void ChargeBattery()
+    public void PickupBattery()
     {
+        HUDManager.Instance.AddBatteryPack();
+        _batteryPacks++;
+    }
+
+    private void chargeBattery()
+    {
+        if (!sufficientBatteryPacksCheck()) return;
+        _batteryPacks--;
         _currentBattery = _maxBattery;
         _flickering = false;
         _forcedOff = false;
+    }
+
+    private bool sufficientBatteryPacksCheck()
+    {
+        if (_batteryPacks > 0) return true;
+        return false;
+        // Use this function to setup a debug
     }
 
     private IEnumerator LerpLight(float targetAngle, float targetRange)

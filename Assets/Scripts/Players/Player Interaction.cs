@@ -75,10 +75,11 @@ public class PlayerInteraction : NetworkBehaviour
     {
         if (_current == null) return;
         _current.Interact(this);
+        _current = null;
     }
 
     public void PickupBattery()
     {
-        GetComponent<FlashlightLogic>().ChargeBattery();
+        GetComponent<FlashlightLogic>().PickupBattery();
     }
 }

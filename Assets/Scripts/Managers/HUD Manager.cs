@@ -36,4 +36,14 @@ public class HUDManager : MonoBehaviour
     {
         _textMesh.text = level.ToString();
     }
+    
+    public void AddBatteryPack()
+    {
+        Debug.Log("Add");
+    }
+
+    public void RemoveBatteryPack()
+    {
+        Debug.Log("Remove");
+    }
 }

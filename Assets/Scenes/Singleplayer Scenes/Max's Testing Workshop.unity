@@ -1057,7 +1057,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 818843857}
+    m_TransformParent: {fileID: 642163571}
     m_Modifications:
     - target: {fileID: 2141471360652476225, guid: d2be90d03919cca41adced498c97e5ea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1106,10 +1106,6 @@ PrefabInstance:
     - target: {fileID: 9136339326537746364, guid: d2be90d03919cca41adced498c97e5ea, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1230920666
-      objectReference: {fileID: 0}
-    - target: {fileID: 9136339326537746364, guid: d2be90d03919cca41adced498c97e5ea, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 923602151
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1447,7 +1443,8 @@ Transform:
   m_LocalPosition: {x: 91.59377, y: 146.14986, z: 7.014876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 445977143}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &658700608
@@ -1872,7 +1869,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 445977143}
   - {fileID: 441999488}
   - {fileID: 1538007594}
   - {fileID: 819506564}
