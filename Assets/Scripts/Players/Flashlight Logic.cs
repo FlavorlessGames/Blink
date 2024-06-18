@@ -17,6 +17,8 @@ public class FlashlightLogic : NetworkBehaviour
     private int _batteryPacks = 0;
     private Coroutine _lerpCoroutine;
     private FlashlightStats _stats;
+    public GameObject BatteryPackPrefab;
+
     private void Start()
     {
         _stats = GetComponent<FlashlightStats>();
@@ -40,6 +42,7 @@ public class FlashlightLogic : NetworkBehaviour
         if (Input.GetButtonDown("Flashlight Focus")) flashlightFocus();
         if (Input.GetButtonUp("Flashlight Focus")) flashlightUnfocus();
         if (Input.GetButtonDown("Recharge")) chargeBattery();
+        if (Input.GetButtonDown("Drop")) dropHeldBattery();
     }
 
 
@@ -104,6 +107,16 @@ public class FlashlightLogic : NetworkBehaviour
     {
         HUDManager.Instance.AddBatteryPack();
         _batteryPacks++;
+    }
+
+    public void dropHeldBattery()
+    {
+        if (_batteryPacks <= 0) return;
+
+        _batteryPacks--;
+        GameObject go = Instantiate(BatteryPackPrefab, transform.position, new Quaternion(0,0,0,0));
+        NetworkObject no = go.GetComponent<NetworkObject>();
+        no.Spawn();
     }
 
     private void chargeBattery()

@@ -2841,25 +2841,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 813853848788071428, guid: bf21d313f29026f41bc06398610171fc, type: 3}
-      propertyPath: _flickerInterval
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 916803265524365320, guid: bf21d313f29026f41bc06398610171fc, type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2103493322111679586, guid: bf21d313f29026f41bc06398610171fc, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1236455829
-      objectReference: {fileID: 0}
-    - target: {fileID: 2103493322111679586, guid: bf21d313f29026f41bc06398610171fc, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 254716095
-      objectReference: {fileID: 0}
-    - target: {fileID: 5117604304333956524, guid: bf21d313f29026f41bc06398610171fc, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8189497512654654733, guid: bf21d313f29026f41bc06398610171fc, type: 3}
       propertyPath: m_LocalPosition.x
