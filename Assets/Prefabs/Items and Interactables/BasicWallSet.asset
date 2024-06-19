@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af04323aec501744ca7d2c83e012f3d3, type: 3}
   m_Name: BasicWallSet
   m_EditorClassIdentifier: 
-  TileSize: 2
+  TileSize: 4
   FloorTile:
     prefab: {fileID: 4657146851598328594, guid: 975cef3ddcf110d49a824e7389b5bc0a, type: 3}
     Rotations: 0
