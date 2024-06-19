@@ -6,9 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(FlashlightStats))]
 public class FlashlightLogic : NetworkBehaviour
 {
-    // public AudioClip flashlightFocus;
-    // public AudioClip flashlightWiden;
-    // public AudioClip flashlightClick;
     [SerializeField] private Light _flashlight;
     [SerializeField] private Camera _cam;
     [SerializeField] private PositionalAudio _audio;
@@ -35,9 +32,11 @@ public class FlashlightLogic : NetworkBehaviour
         UpdateLight();
         castFocusedBeam();
         if (!IsOwner) return;
+
         batteryLevel();
         if (_flickering) flicker();
         if (PauseManager.Instance.IsPaused) return;
+
         if (Input.GetButtonDown("Flashlight Button")) lightSwitch();
         if (Input.GetButtonDown("Flashlight Focus")) flashlightFocus();
         if (Input.GetButtonUp("Flashlight Focus")) flashlightUnfocus();
@@ -64,6 +63,7 @@ public class FlashlightLogic : NetworkBehaviour
     {
         if (!_stats.TurnedOn) return;
         if (outOfBattery()) return;
+
         updateBatteryLevel();
         checkFlickering();
     }
@@ -71,12 +71,14 @@ public class FlashlightLogic : NetworkBehaviour
     private void checkFlickering()
     {
         if (_flickering) return;
+
         if (_stats.CurrentBattery < _stats.LowBattery) _flickering = true;
     }
 
     private bool outOfBattery()
     {
         if (_stats.CurrentBattery > 0) return false;
+
         _stats.ForcedOff = true;
         _stats.CurrentBattery = 0f;
         return true;
@@ -92,6 +94,7 @@ public class FlashlightLogic : NetworkBehaviour
     {
         _audio.Play("Flashlight Click");
         if (_stats.CurrentBattery < 0) return;
+
         _stats.TurnedOn = !_stats.TurnedOn;
     }
 
@@ -99,6 +102,7 @@ public class FlashlightLogic : NetworkBehaviour
     {
         _flickerTimer -= Time.deltaTime;
         if (_flickerTimer > 0) return;
+
         _stats.ForcedOff = !_stats.ForcedOff;
         _flickerTimer = _stats.FlickerInterval;
     }
@@ -107,6 +111,7 @@ public class FlashlightLogic : NetworkBehaviour
     {
         HUDManager.Instance.AddBatteryPack();
         _batteryPacks++;
+        HUDManager.Instance.SetBatteryPackCount(_batteryPacks);
     }
 
     public void dropHeldBattery()
@@ -114,17 +119,20 @@ public class FlashlightLogic : NetworkBehaviour
         if (_batteryPacks <= 0) return;
 
         _batteryPacks--;
+        HUDManager.Instance.SetBatteryPackCount(_batteryPacks);
         Vector3 placement = transform.position + transform.forward * 2 + transform.up;
         GameObject go = Instantiate(BatteryPackPrefab, placement, new Quaternion(0,0,0,0));
         NetworkObject no = go.GetComponent<NetworkObject>();
-        go.GetComponent<BatteryPack>().Toss(transform.forward);
+        go.GetComponent<BatteryPack>().Toss(_flashlight.transform.forward);
         no.Spawn();
     }
 
     private void chargeBattery()
     {
         if (!sufficientBatteryPacksCheck()) return;
+        
         _batteryPacks--;
+        HUDManager.Instance.SetBatteryPackCount(_batteryPacks);
         _stats.CurrentBattery = _stats.MaxBattery;
         _flickering = false;
         _stats.ForcedOff = false;
