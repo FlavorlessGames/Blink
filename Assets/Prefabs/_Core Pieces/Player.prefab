@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1078224837
+  GlobalObjectIdHash: 254716095
   InScenePlacedSourceGlobalObjectIdHash: 254716095
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -278,6 +278,7 @@ MonoBehaviour:
   WideAngle: 100
   WideRange: 20
   LerpDuration: 0.3
+  ReplaceBatteryDuration: 1
 --- !u!114 &7586382401356242704
 MonoBehaviour:
   m_ObjectHideFlags: 0

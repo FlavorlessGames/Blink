@@ -111,7 +111,6 @@ public class FlashlightLogic : NetworkBehaviour
 
     public void PickupBattery()
     {
-        HUDManager.Instance.AddBatteryPack();
         _batteryPacks++;
         HUDManager.Instance.SetBatteryPackCount(_batteryPacks);
     }

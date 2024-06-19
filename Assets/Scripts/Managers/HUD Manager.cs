@@ -55,14 +55,4 @@ public class HUDManager : MonoBehaviour
         _chargeDisplay.style.visibility = show? Visibility.Visible : Visibility.Hidden;
         _chargeDisplay.value = level * 100;
     }
-    
-    public void AddBatteryPack()
-    {
-        Debug.Log("Add");
-    }
-
-    public void RemoveBatteryPack()
-    {
-        Debug.Log("Remove");
-    }
 }
