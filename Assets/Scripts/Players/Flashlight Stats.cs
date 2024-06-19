@@ -13,6 +13,7 @@ public class FlashlightStats : NetworkBehaviour
     public float WideAngle = 100f;
     public float WideRange = 20f;
     public float LerpDuration = .3f;
+    public float ReplaceBatteryDuration = 1f;
     public bool On  
     {
         get 

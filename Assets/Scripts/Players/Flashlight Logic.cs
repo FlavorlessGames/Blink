@@ -13,6 +13,7 @@ public class FlashlightLogic : NetworkBehaviour
     private float _flickerTimer;
     private int _batteryPacks = 0;
     private Coroutine _lerpCoroutine;
+    private Coroutine _chargingCoroutine;
     private FlashlightStats _stats;
     public GameObject BatteryPackPrefab;
 
@@ -41,6 +42,7 @@ public class FlashlightLogic : NetworkBehaviour
         if (Input.GetButtonDown("Flashlight Focus")) flashlightFocus();
         if (Input.GetButtonUp("Flashlight Focus")) flashlightUnfocus();
         if (Input.GetButtonDown("Recharge")) chargeBattery();
+        if (Input.GetButtonUp("Recharge")) cancelCharge();
         if (Input.GetButtonDown("Drop")) dropHeldBattery();
     }
 
@@ -130,9 +132,40 @@ public class FlashlightLogic : NetworkBehaviour
     private void chargeBattery()
     {
         if (!sufficientBatteryPacksCheck()) return;
-        
+        cancelCharge();
+        _chargingCoroutine = StartCoroutine(chargeTimer());
+    }
+
+    private void cancelCharge()
+    {
+        if (_chargingCoroutine == null) return;
+
+        StopCoroutine(_chargingCoroutine);
+        HUDManager.Instance.SetChargeBar(false, 0f);
+        _stats.ForcedOff = false;  // This may create issues
+    }
+
+    private IEnumerator chargeTimer()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < _stats.ReplaceBatteryDuration)
+        {
+            _stats.ForcedOff = true;
+            elapsedTime += Time.deltaTime;
+            HUDManager.Instance.SetChargeBar(true, elapsedTime/_stats.ReplaceBatteryDuration);
+            yield return null;
+        }
+
+        finishCharge();
+        yield return null;
+    }
+
+    private void finishCharge()
+    {
         _batteryPacks--;
         HUDManager.Instance.SetBatteryPackCount(_batteryPacks);
+        HUDManager.Instance.SetChargeBar(false, 0f);
         _stats.CurrentBattery = _stats.MaxBattery;
         _flickering = false;
         _stats.ForcedOff = false;
