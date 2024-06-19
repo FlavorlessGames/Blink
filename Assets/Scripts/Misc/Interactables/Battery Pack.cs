@@ -18,7 +18,8 @@ public class BatteryPack : NetworkBehaviour
 
     private void interactHandler(PlayerInteraction player)
     {
-        player.PickupBattery();
+        bool pickedUp = player.PickupBattery();
+        if (!pickedUp) return;
         spinRpc();
         // Debug.Log("picked up");
     }

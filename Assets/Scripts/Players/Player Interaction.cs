@@ -77,8 +77,8 @@ public class PlayerInteraction : NetworkBehaviour
         _current.Interact(this);
     }
 
-    public void PickupBattery()
+    public bool PickupBattery()
     {
-        GetComponent<FlashlightLogic>().PickupBattery();
+        return GetComponent<FlashlightLogic>().PickupBattery();
     }
 }

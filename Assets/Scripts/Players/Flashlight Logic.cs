@@ -63,7 +63,7 @@ public class FlashlightLogic : NetworkBehaviour
 
     private void batteryLevel()
     {
-        if (!_stats.TurnedOn) return;
+        if (!_stats.On) return;
         if (outOfBattery()) return;
 
         updateBatteryLevel();
@@ -109,10 +109,12 @@ public class FlashlightLogic : NetworkBehaviour
         _flickerTimer = _stats.FlickerInterval;
     }
 
-    public void PickupBattery()
+    public bool PickupBattery()
     {
+        if (_batteryPacks >= _stats.MaxBatteryCarryingCapacity) return false;
         _batteryPacks++;
         HUDManager.Instance.SetBatteryPackCount(_batteryPacks);
+        return true;
     }
 
     public void dropHeldBattery()

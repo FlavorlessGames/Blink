@@ -14,6 +14,7 @@ public class FlashlightStats : NetworkBehaviour
     public float WideRange = 20f;
     public float LerpDuration = .3f;
     public float ReplaceBatteryDuration = 1f;
+    public int MaxBatteryCarryingCapacity = 3;
     public bool On  
     {
         get 
