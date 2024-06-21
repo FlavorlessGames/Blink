@@ -9,6 +9,7 @@ public class FlashlightLogic : NetworkBehaviour
     [SerializeField] private Light _flashlight;
     [SerializeField] private Camera _cam;
     [SerializeField] private PositionalAudio _audio;
+    public bool Debug = false;
     private bool _flickering = false;
     private float _flickerTimer;
     private int _batteryPacks = 0;
@@ -132,7 +133,7 @@ public class FlashlightLogic : NetworkBehaviour
 
     private void chargeBattery()
     {
-        if (!sufficientBatteryPacksCheck()) return;
+        if (!sufficientBatteryPacksCheck() && !Debug) return;
         cancelCharge();
         _chargingCoroutine = StartCoroutine(chargeTimer());
     }
