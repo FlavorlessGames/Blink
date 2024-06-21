@@ -50,4 +50,14 @@ public class EntityManager : MonoBehaviour
         }
         return enemyPositions;
     }
+
+    // public List<PlayerAccess> GetPlayers()
+    // {
+    //     return (List<Pla)
+    // }
+
+    // public void RegisterTarget(EnemyAccess ea, PlayerAccess pa)
+    // {
+
+    // }
 }

@@ -18,6 +18,7 @@ public class EnemyKill : MonoBehaviour
     void Update()
     {
         kill();
+        gameObject.SetActive(false); // Todo: remove and add real death behavior
     }
 
     private void stop()
