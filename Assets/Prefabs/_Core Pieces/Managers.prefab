@@ -111,7 +111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11fb4f59c5cefaf4aaf043c198c8f799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sounds: []
+  _sounds:
+  - Name: Siren Song
+    Clip: {fileID: 8300000, guid: 2e1adb345577929418439b530db74379, type: 3}
+    Volume: 0
+    Pitch: 0
+    source: {fileID: 0}
 --- !u!114 &6360673856008648630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +208,7 @@ Transform:
   - {fileID: 6668326194817665015}
   - {fileID: 2406683884843843906}
   - {fileID: 3292818621433190534}
+  - {fileID: 3939275098138984534}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7211919407546460949
@@ -253,6 +259,50 @@ MonoBehaviour:
   _batteryText: {fileID: 1717635108014058828}
   _batteryPackCount: {fileID: 6724504875578321181}
   _chargeBar: {fileID: 8520701446215854919}
+--- !u!1 &7874531511669751293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3939275098138984534}
+  - component: {fileID: 8335391813999859500}
+  m_Layer: 0
+  m_Name: Network Buttons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3939275098138984534
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7874531511669751293}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -98.89372, y: -147.03098, z: -18.967157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1163393902338299371}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8335391813999859500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7874531511669751293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bca1972521c904b909161cdcf7df73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2454849631170190805
 PrefabInstance:
   m_ObjectHideFlags: 0
