@@ -18,7 +18,6 @@ public class EnemyKill : MonoBehaviour
     void Update()
     {
         kill();
-        gameObject.SetActive(false); // Todo: remove and add real death behavior
     }
 
     private void stop()
@@ -49,8 +48,14 @@ public class EnemyKill : MonoBehaviour
         if (Physics.Raycast(ray, out hit, _killRange))
         {
             PlayerAccess player = hit.transform.GetComponent<PlayerAccess>();
-            if (player != null) player.Kill();
+            if (player != null) killPlayer(player);
         }
+    }
+
+    private void killPlayer(PlayerAccess pa)
+    {
+        pa.Kill(); 
+        gameObject.SetActive(false); // Todo: remove and add real death behavior
     }
 
 

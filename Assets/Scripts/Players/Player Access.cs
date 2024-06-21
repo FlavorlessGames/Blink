@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAccess : MonoBehaviour
 {
+    public Vector3 Position { get { return transform.position; } }
     // Update is called once per frame
     void Update()
     {

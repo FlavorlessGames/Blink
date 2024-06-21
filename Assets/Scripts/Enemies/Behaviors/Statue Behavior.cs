@@ -52,10 +52,10 @@ public class StatueBehavior : MonoBehaviour
     protected virtual List<Vector3> targetsInRange()
     {
         List<Vector3> targets = new List<Vector3>();
-        foreach (Vector3 position in EntityManager.Instance.GetPlayerPositions())
+        foreach (PlayerAccess pa in EntityManager.Instance.GetPlayers())
         {
-            if (!Utility.InRange(transform.position, position, _base.DetectionRange)) continue;
-            targets.Add(position);
+            if (!Utility.InRange(transform.position, pa.Position, _base.DetectionRange)) continue;
+            targets.Add(pa.Position);
         }
         return targets;
     }

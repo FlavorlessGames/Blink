@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2482993980282287191, guid: 391908bdb14819943b2269b6ffa6a006, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -94.39463
+      value: -112.3
       objectReference: {fileID: 0}
     - target: {fileID: 2482993980282287191, guid: 391908bdb14819943b2269b6ffa6a006, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2482993980282287191, guid: 391908bdb14819943b2269b6ffa6a006, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.2318177
+      value: 8.23
       objectReference: {fileID: 0}
     - target: {fileID: 2482993980282287191, guid: 391908bdb14819943b2269b6ffa6a006, type: 3}
       propertyPath: m_LocalRotation.w
@@ -50,11 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3840076414405174261, guid: 391908bdb14819943b2269b6ffa6a006, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2014235915
+      value: 3869720590
       objectReference: {fileID: 0}
     - target: {fileID: 3840076414405174261, guid: 391908bdb14819943b2269b6ffa6a006, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 684079174
+      value: 559636315
       objectReference: {fileID: 0}
     - target: {fileID: 8465262955872474939, guid: 391908bdb14819943b2269b6ffa6a006, type: 3}
       propertyPath: m_Name

@@ -7,6 +7,7 @@ public class EntityManager : MonoBehaviour
     public static EntityManager Instance { get; private set; }
     private Dictionary<PlayerAccess, Vector3> _playerPositions;
     private Dictionary<EnemyAccess, Vector3> _enemyPositions;
+    private Dictionary<EnemyAccess, PlayerAccess> _targeting;
     void Start()
     {
         if (Instance != null) Destroy(this);
@@ -51,13 +52,23 @@ public class EntityManager : MonoBehaviour
         return enemyPositions;
     }
 
-    // public List<PlayerAccess> GetPlayers()
-    // {
-    //     return (List<Pla)
-    // }
+    public List<PlayerAccess> GetPlayers()
+    {
+        List<PlayerAccess> pas = new List<PlayerAccess>();
+        foreach (PlayerAccess pa in _playerPositions.Keys)
+        {
+            pas.Add(pa);
+        }
+        return pas;
+    }
 
-    // public void RegisterTarget(EnemyAccess ea, PlayerAccess pa)
-    // {
+    public void RegisterTarget(EnemyAccess ea, PlayerAccess pa)
+    {
 
-    // }
+    }
+
+    public void ClearTarget(EnemyAccess ea)
+    {
+
+    }
 }
