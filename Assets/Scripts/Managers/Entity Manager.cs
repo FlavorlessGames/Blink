@@ -80,6 +80,7 @@ public class EntityManager : MonoBehaviour
         PlayerAccess pa = _targeting[ea];
         EnemyAccess closest = getClosestEnemy(pa);
         if (closest == ea) return pa.Position;
+        if (!ea.CanSee(closest)) return pa.Position;
         return getIndirectDestination(ea.Position, pa.Position, closest.Position);
     }
 
