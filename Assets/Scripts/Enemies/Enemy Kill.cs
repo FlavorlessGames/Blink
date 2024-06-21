@@ -55,6 +55,7 @@ public class EnemyKill : MonoBehaviour
     private void killPlayer(PlayerAccess pa)
     {
         pa.Kill(); 
+        EntityManager.Instance.ClearTarget(GetComponent<EnemyAccess>());
         gameObject.SetActive(false); // Todo: remove and add real death behavior
     }
 

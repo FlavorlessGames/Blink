@@ -39,7 +39,7 @@ public class SentryBehavior : StatueBehavior
 
     protected void returnIfOutOfRange()
     {
-        if (targetsInRange().Count > 0) return;
+        if (!targetInRange()) return;
         _mode = EnemyMode.Returning;
         _base.Stop();
     }

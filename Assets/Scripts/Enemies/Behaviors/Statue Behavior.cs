@@ -2,14 +2,18 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(StatueBase))]
+[RequireComponent(typeof(EnemyAccess))]
 public class StatueBehavior : MonoBehaviour
 {
     [SerializeField] protected EnemyMode _mode;
     protected StatueBase _base;
+    protected EnemyAccess _ea;
 
     protected virtual void Start()
     {
         _base = GetComponent<StatueBase>();
+        _ea = GetComponent<EnemyAccess>();
         if (_base == null) Debug.LogError("Statue Base not assigned");
     }
 
@@ -30,54 +34,69 @@ public class StatueBehavior : MonoBehaviour
 
     protected void pursueIfInRange()
     {
-        if (targetsInRange().Count <= 0) return;
+        if (targetInRange()) return;
         _mode = EnemyMode.Pursuing;
         _base.Resume();
     }
 
     protected virtual void pursueTarget()
     {
-        Vector3 target = selectTarget();
-        if (target == Vector3.zero) return;
-        _base.SetDestination(target);
+        PlayerAccess target = selectTarget();
+        EntityManager.Instance.RegisterTarget(_ea, target);
+        Vector3 destination = EntityManager.Instance.GetPath(_ea);
+        if (destination == Vector3.zero) return;
+        _base.SetDestination(destination);
     }
 
     protected void idleIfOutOfRange()
     {
-        if (targetsInRange().Count > 0) return;
+        if (!targetInRange()) return;
+        EntityManager.Instance.ClearTarget(_ea);
         _mode = EnemyMode.Idle;
         _base.Stop();
     }
 
-    protected virtual List<Vector3> targetsInRange()
+    protected bool targetInRange()
     {
-        List<Vector3> targets = new List<Vector3>();
+        foreach (PlayerAccess pa in EntityManager.Instance.GetPlayers())
+        {
+            if (!Utility.InRange(transform.position, pa.Position, _base.DetectionRange)) return true;
+        }
+        return false;
+    }
+
+    protected virtual List<PlayerAccess> validTargets()
+    {
+        List<PlayerAccess> targets = new List<PlayerAccess>();
         foreach (PlayerAccess pa in EntityManager.Instance.GetPlayers())
         {
             if (!Utility.InRange(transform.position, pa.Position, _base.DetectionRange)) continue;
-            targets.Add(pa.Position);
+            targets.Add(pa);
         }
         return targets;
     }
 
-    protected Vector3 selectTarget()
+    protected PlayerAccess selectTarget()
     {
-        Vector3 target = new Vector3(0,0,0);
-        if (EntityManager.Instance == null) return target;
-        foreach (Vector3 position in targetsInRange())
+        PlayerAccess target = null;
+        foreach (PlayerAccess pa in validTargets())
         {
-            target = closest(transform.position, target, position);
+            if (target == null) target = pa;
+            if (closest(transform.position, target.Position, pa.Position))
+            {
+                target = pa;
+            }
         }
         return target;
     }
 
-    protected Vector3 closest(Vector3 start, Vector3 pos1, Vector3 pos2)
+    protected bool closest(Vector3 start, Vector3 pos1, Vector3 pos2)
     {
-        if (pos1 == Vector3.zero) return pos2;
-        if (pos2 == Vector3.zero) return pos1;
+        if (pos1 == Vector3.zero) return false;
+        if (pos2 == Vector3.zero) return true;
         var distance1 = Vector3.Distance(start, pos1);
         var distance2 = Vector3.Distance(start, pos2);
-        return distance1 < distance2 ? pos1 : pos2;
+        return distance1 < distance2; 
     }
 
     // [Rpc(SendTo.Everyone)]

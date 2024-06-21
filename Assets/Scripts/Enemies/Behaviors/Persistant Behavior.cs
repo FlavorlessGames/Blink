@@ -23,14 +23,4 @@ public class PersistantBehavior : StatueBehavior
                 break;
         }
     }
-
-    protected override List<Vector3> targetsInRange()
-    {
-        List<Vector3> targets = new List<Vector3>();
-        foreach (Vector3 position in EntityManager.Instance.GetPlayerPositions())
-        {
-            targets.Add(position);
-        }
-        return targets;
-    }
 }
