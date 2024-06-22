@@ -11,7 +11,9 @@ public class Sound
     [Range(.1f, 3f)]
     public float Pitch = 1f;
 
-    public AudioSource source;
+    public AudioSource source { get { return _source; } set { _source = value; } }
+    private AudioSource _source;
+    public bool ConstantlyPlay;
 }
 
 

@@ -7,9 +7,11 @@ using Unity.Netcode;
 public class PositionalAudio : NetworkBehaviour
 {
     [SerializeField] private List<PositionalSound> _sounds;
+    private List<PositionalSound> _constants;
 
     void Awake()
     {
+        _constants = new List<PositionalSound>();
         foreach (PositionalSound s in _sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -20,6 +22,16 @@ public class PositionalAudio : NetworkBehaviour
             s.source.spatialBlend = s.SpatialBlend;
             s.source.minDistance = s.MinDistance;
             s.source.maxDistance = s.MaxDistance;
+            if (s.ConstantlyPlay) _constants.Add(s);
+        }
+    }
+
+    void Start()
+    {
+        foreach (PositionalSound s in _constants)
+        {
+            s.source.loop = true;
+            s.source.Play();
         }
     }
 
