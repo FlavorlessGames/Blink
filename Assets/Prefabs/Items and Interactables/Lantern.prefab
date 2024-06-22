@@ -131,7 +131,7 @@ MonoBehaviour:
   _light: {fileID: 2216556637779071553}
   _modifier: {fileID: 7397140112798259931}
   _on: 0
-  _illuminateDuration: 39
+  _illuminateDuration: 50
 --- !u!114 &839172576825077870
 MonoBehaviour:
   m_ObjectHideFlags: 0
