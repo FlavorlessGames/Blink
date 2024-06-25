@@ -34,3 +34,6 @@ MonoBehaviour:
   EndWallTile:
     prefab: {fileID: 7223742321738891279, guid: 528102ac49aada6439f06cccb26cfd3b, type: 3}
     Rotations: 3
+  DoorTile:
+    prefab: {fileID: 3781203399475048820, guid: 049492f59d8ac40668aedcc8f446977d, type: 3}
+    Rotations: 1
