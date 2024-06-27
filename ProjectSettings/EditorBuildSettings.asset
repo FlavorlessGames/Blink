@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TestLevel1.unity
     guid: c4c99a306cbf74174b7be9bd73748d62
   - enabled: 1
-    path: Assets/Scenes/Multiplayer Scenes/Auth.unity
+    path: Assets/Scenes/Multiplayer Scenes/First Scene.unity
     guid: 67b1b1b9ca36b5f4ca6f58696a880552
   - enabled: 1
     path: Assets/Scenes/Multiplayer Scenes/Multiplayer Menu.unity

@@ -1134,7 +1134,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 642163571}
+    m_TransformParent: {fileID: 818843857}
     m_Modifications:
     - target: {fileID: 1105873968310332393, guid: fb11659ec4faf0348aaa8828f73afd1f, type: 3}
       propertyPath: _requiredLocks
@@ -1920,8 +1920,7 @@ Transform:
   m_LocalPosition: {x: 91.59377, y: 146.14986, z: 7.014876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 441999488}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &661175423
@@ -2641,6 +2640,7 @@ Transform:
   - {fileID: 1538007594}
   - {fileID: 944805025}
   - {fileID: 2007519062}
+  - {fileID: 441999488}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &819506564 stripped
@@ -4851,6 +4851,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 155698318013265906, guid: bf21d313f29026f41bc06398610171fc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 813853848788071428, guid: bf21d313f29026f41bc06398610171fc, type: 3}
       propertyPath: Debug
       value: 1
@@ -5344,7 +5348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf729b26edc0ff4a8d9cb0aea732000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Index: 0
 --- !u!4 &1593473828 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8074038206903237470, guid: ea5d6e6069298494ebe3a7d9201a0b2e, type: 3}
