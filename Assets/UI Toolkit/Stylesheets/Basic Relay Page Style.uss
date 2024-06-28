@@ -1,22 +1,16 @@
 Button {
-    color: rgb(63, 63, 63);
-    opacity: 1;
-    width: auto;
-    align-self: center;
-    border-left-color: rgba(255, 255, 255, 0);
-    border-right-color: rgba(255, 255, 255, 0);
-    border-top-color: rgba(255, 255, 255, 0);
-    border-bottom-color: rgba(255, 255, 255, 0);
-    border-top-width: 15px;
-    border-right-width: 15px;
-    border-bottom-width: 15px;
-    border-left-width: 15px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    background-color: rgb(94, 180, 209);
+    -unity-background-image-tint-color: rgba(56, 56, 56, 0);
+    background-color: rgb(142, 157, 226);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-top-width: 2px;
+    border-right-width: 7px;
+    border-bottom-width: 7px;
+    border-left-width: 2px;
     font-size: 100%;
+    align-self: center;
 }
 
 TextField {

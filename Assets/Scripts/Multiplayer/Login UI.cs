@@ -21,8 +21,8 @@ public class LoginUI : NetworkBehaviour
     void Start()
     {
         _insert = uiDocument.rootVisualElement.Q<VisualElement>(id_Insert);
-        Button authButton = _insert.Q<Button>(id_AuthButton);
-        authButton.clicked += LoginAnonymously;
+        Button authButton = newButton("Login", LoginAnonymously);
+        _insert.Add(authButton);
     }
 
     void Update()
