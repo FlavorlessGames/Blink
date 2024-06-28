@@ -8,19 +8,26 @@ using System;
 public class LoginUI : NetworkBehaviour
 {
     private const string id_AuthButton = "AuthButton";
-    private const string id_Insert = "insert";
+    private const string id_Insert = "body";
+    private const string id_Header = "header";
+    private const string id_Footer = "footer";
 
     public UIDocument uiDocument;
     public SceneSelector Scenes;
     private VisualElement _insert;
+    private VisualElement _header;
+    private VisualElement _footer;
     private VisualElement _lobbyElement;
     private Screen _currentScreen;
     private const float c_RefreshDelay = 1.5f;
     private float _nextRefreshTime;
+    private string _selectedScene;
 
     void Start()
     {
         _insert = uiDocument.rootVisualElement.Q<VisualElement>(id_Insert);
+        _footer = uiDocument.rootVisualElement.Q<VisualElement>(id_Footer);
+        _header = uiDocument.rootVisualElement.Q<VisualElement>(id_Header);
         Button authButton = newButton("Login", LoginAnonymously);
         _insert.Add(authButton);
     }
@@ -71,7 +78,7 @@ public class LoginUI : NetworkBehaviour
         setLoading();
         await MultiplayerManager.Instance.CreateGame();
         NetworkManager.Singleton.StartHost();
-        StartGameScreen();
+        SelectSceneScreen();
     }
 
     public void LobbyPanel()
@@ -86,11 +93,29 @@ public class LoginUI : NetworkBehaviour
         refreshLobbies();
     }
 
+    public void SelectSceneScreen()
+    {
+        clear();
+        _header.Add(new Label("Select a Scene"));
+        foreach (string name in Scenes.SceneNames())
+        {
+            _insert.Add(newButton(name, () => {setScene(name);}));
+        }
+    }
+
     public void StartGameScreen()
     {
-        _insert.Clear();
+        clear();
+        _footer.Add(new Label(string.Format("Selected Scene: {0}", _selectedScene)));
         Button start = newButton("Start Game", startGame);
+        _header.Add(new Label("Connected Players: 0/3 (currently not operational)"));
         _insert.Add(start);
+    }
+
+    private void setScene(string name)
+    {
+        _selectedScene = name;
+        StartGameScreen();
     }
 
     private void startGame()
@@ -98,7 +123,7 @@ public class LoginUI : NetworkBehaviour
         setLoading();
         string [] names = Scenes.SceneNames();
 
-        NetworkManager.Singleton.SceneManager.LoadScene(names[0], LoadSceneMode.Single);
+        Scenes.Load(_selectedScene);
     }
     
     private void setLoading()
@@ -131,6 +156,13 @@ public class LoginUI : NetworkBehaviour
     {
         _insert.Clear();
         _insert.Add(new Label("Waiting for Host to start Game"));
+    }
+
+    private void clear()
+    {
+        _insert.Clear();
+        _header.Clear();
+        _footer.Clear();
     }
 
     private enum Screen

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 using UnityEditor;
 
 public class SceneSelector : MonoBehaviour
@@ -18,5 +19,10 @@ public class SceneSelector : MonoBehaviour
         }
 
         return names;
+    }
+
+    public void Load(string name)
+    {
+        NetworkManager.Singleton.SceneManager.LoadScene(name, LoadSceneMode.Single);
     }
 }
