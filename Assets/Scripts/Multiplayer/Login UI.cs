@@ -28,8 +28,7 @@ public class LoginUI : NetworkBehaviour
         _insert = uiDocument.rootVisualElement.Q<VisualElement>(id_Insert);
         _footer = uiDocument.rootVisualElement.Q<VisualElement>(id_Footer);
         _header = uiDocument.rootVisualElement.Q<VisualElement>(id_Header);
-        Button authButton = newButton("Login", LoginAnonymously);
-        _insert.Add(authButton);
+        JoinScreen();
     }
 
     void Update()
@@ -49,12 +48,6 @@ public class LoginUI : NetworkBehaviour
             default:
                 return;
         }
-    }
-
-    public async void LoginAnonymously() {
-        setLoading();
-        await Authentication.Login();
-        JoinScreen();
     }
 
     public void JoinScreen()

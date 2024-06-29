@@ -4,6 +4,16 @@ using UnityEngine;
 public class GameManager : NetworkBehaviour {
     [SerializeField] private PlayerMovement _playerPrefab;
 
+    void Start()
+    {
+        if (!IsSpawned) InitSingleplayer(); // Todo: make this safer
+    }
+
+    public void InitSingleplayer()
+    {
+        NetworkManager.Singleton.StartHost();
+    }
+
     public override void OnNetworkSpawn() {
         SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
     }   

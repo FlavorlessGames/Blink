@@ -7,7 +7,14 @@ using UnityEditor;
 
 public class SceneSelector : MonoBehaviour
 {
+    public SceneAsset MainMenu;
     public List<SceneAsset> Scenes;
+
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene(MainMenu.name);
+    }
 
     public string [] SceneNames()
     {

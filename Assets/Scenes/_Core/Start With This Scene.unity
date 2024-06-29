@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d0f89ab86cc4a409d9f10444cbd691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainMenu: {fileID: 102900000, guid: 67b1b1b9ca36b5f4ca6f58696a880552, type: 3}
   Scenes:
   - {fileID: 102900000, guid: 124737500394b9e4cbca43afcf54e062, type: 3}
 --- !u!4 &1013260926
@@ -470,7 +471,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1789358640}
   - component: {fileID: 1789358639}
-  - component: {fileID: 1789358641}
+  - component: {fileID: 1789358642}
+  - component: {fileID: 1789358643}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -509,7 +511,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1789358641
+--- !u!114 &1789358642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -518,7 +520,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1789358638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abd22341479f77b4eae8ed491cc55ff3, type: 3}
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2605178504
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &1789358643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789358638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876690819c6b37b44aa4014b4eb9e750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 1789358639}

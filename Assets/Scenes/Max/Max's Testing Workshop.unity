@@ -1433,7 +1433,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 538535788}
-    PlayerPrefab: {fileID: 155698318013265906, guid: bf21d313f29026f41bc06398610171fc, type: 3}
+    PlayerPrefab: {fileID: 0}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 0e8ea54ac0fe01842af5f577eed39eb6, type: 2}
@@ -2713,6 +2713,71 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea5d6e6069298494ebe3a7d9201a0b2e, type: 3}
+--- !u!1001 &856008935
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 328284455890482098, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 218970071
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254661417200184284, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3272327579
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409999600330074846, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 101.09652
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409999600330074846, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 146.80864
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409999600330074846, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 25.562458
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409999600330074846, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409999600330074846, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409999600330074846, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409999600330074846, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409999600330074846, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409999600330074846, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409999600330074846, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8940873579125612305, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: m_Name
+      value: Multiplayer Level Managers
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
 --- !u!4 &868632372 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1346008960514055532, guid: 381f4efc21cbfe64cbc58acb741da0c6, type: 3}
@@ -3294,6 +3359,10 @@ PrefabInstance:
     - target: {fileID: 5567399596319973412, guid: 02bcddf8cb6019940bb7aea030fcc152, type: 3}
       propertyPath: m_Name
       value: Managers
+      objectReference: {fileID: 0}
+    - target: {fileID: 5567399596319973412, guid: 02bcddf8cb6019940bb7aea030fcc152, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5348,6 +5417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf729b26edc0ff4a8d9cb0aea732000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 0
 --- !u!4 &1593473828 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8074038206903237470, guid: ea5d6e6069298494ebe3a7d9201a0b2e, type: 3}
@@ -6529,6 +6599,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1448131712}
+  - {fileID: 856008935}
   - {fileID: 1008372254}
   - {fileID: 538535787}
   - {fileID: 483090212}
