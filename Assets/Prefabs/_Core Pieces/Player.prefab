@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 755486669
+  GlobalObjectIdHash: 4280727722
   InScenePlacedSourceGlobalObjectIdHash: 254716095
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -226,7 +226,7 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 26b25912cdc34ee44b2c293406b14b7f, type: 3}
     Volume: 0.5
     Pitch: 1
-    source: {fileID: 0}
+    ConstantlyPlay: 0
     SpatialBlend: 1
     MinDistance: 1
     MaxDistance: 500
@@ -234,7 +234,7 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 78f26311623c9ad41be6fdb98b936d1f, type: 3}
     Volume: 0.5
     Pitch: 1
-    source: {fileID: 0}
+    ConstantlyPlay: 0
     SpatialBlend: 1
     MinDistance: 1
     MaxDistance: 500
@@ -242,7 +242,7 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: db59cfbdf9897de4e9a737ebdc0a0e5f, type: 3}
     Volume: 0.5
     Pitch: 1
-    source: {fileID: 0}
+    ConstantlyPlay: 0
     SpatialBlend: 1
     MinDistance: 1
     MaxDistance: 500
@@ -635,7 +635,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.89146227, b: 0.7216981, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1.4
   m_Range: 20
   m_SpotAngle: 80
   m_InnerSpotAngle: 1

@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Singleplayer Scenes/Giacomo Levels/Cloisters.unity
     guid: 1c4464a08855a42818d9d410d7ce4e20
+  - enabled: 1
+    path: Assets/Scenes/Singleplayer Scenes/Giacomo Levels/Dormitory.unity
+    guid: 0cb4862a5bed940a09317e2e971f4e3a
   m_configObjects: {}
