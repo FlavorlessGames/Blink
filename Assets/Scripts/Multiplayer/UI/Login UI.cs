@@ -144,9 +144,18 @@ public class LoginUI : NetworkBehaviour
     private async void selectLobby(string id)
     {
         setLoading();
-        await MultiplayerManager.Instance.JoinLobby(id);
-        NetworkManager.Singleton.StartClient();
-        RoomScreen();
+
+        try
+        {
+            await MultiplayerManager.Instance.JoinLobby(id);
+            NetworkManager.Singleton.StartClient();
+            RoomScreen();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+            LobbyPanel();
+        }
     }
 
     public void RoomScreen()
