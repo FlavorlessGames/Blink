@@ -105,7 +105,7 @@ public class LoginUI : NetworkBehaviour
         _currentScreen = Screen.StartGame;
         _footer.Add(new Label(string.Format("Selected Scene: {0}", _selectedScene)));
         Button start = newButton("Start Game", startGame);
-        _header.Add(new Label(string.Format(c_lobbyPlayerText, 1)));
+        _header.Add(new Label(string.Format(c_lobbyPlayerText, MultiplayerManager.Instance.PlayersInLobby)));
         _insert.Add(start);
     }
 
@@ -132,11 +132,11 @@ public class LoginUI : NetworkBehaviour
 
     private async void refreshLobbies()
     {
-        List<string> ids = await MultiplayerManager.Instance.FetchLobbies();
+        List<LobbyDetails> lds = await MultiplayerManager.Instance.FetchLobbies();
         _lobbyElement.Clear();
-        foreach (string id in ids)
+        foreach (LobbyDetails ld in lds)
         {
-            Button lobby = newButton(id, () => {selectLobby(id);});
+            Button lobby = newButton(ld.ToString(), () => {selectLobby(ld.ID);});
             _lobbyElement.Add(lobby);
         }
     }
@@ -159,7 +159,6 @@ public class LoginUI : NetworkBehaviour
     {
         if (_currentScreen != Screen.StartGame) return;
         
-        Debug.Log(playerCount);
         _header.Clear();
         _header.Add(new Label(string.Format(c_lobbyPlayerText, playerCount)));
     }

@@ -95,22 +95,22 @@ public class MultiplayerManager : NetworkBehaviour
         return allLobbies.Results;
     }
 
-    public async Task<List<string>> FetchLobbies()
+    public async Task<List<LobbyDetails>> FetchLobbies()
     {
         try
         {
             List<Lobby> allLobbies = await GatherLobbies();
             
-            var lobbyIDs = allLobbies.Where(l => l.HostId != Authentication.PlayerId).Select(l => l.Id).ToList();
+            var lobbyDetails = allLobbies.Where(l => l.HostId != Authentication.PlayerId).Select(l => new LobbyDetails(l)).ToList();
 
-            return lobbyIDs;
+            return lobbyDetails;
 
         }
         catch (Exception e)
         {
             Debug.Log(e);
         }
-        return new List<string>();
+        return new List<LobbyDetails>();
     }
 
     public async Task JoinLobby(string lobbyID)
@@ -142,7 +142,28 @@ public class MultiplayerManager : NetworkBehaviour
             return;
         }
 
-        // todo leave lobby;
+        OnLobbyLeft();
+    }
+
+    private async void OnLobbyLeft()
+    {
+        NetworkManager.Singleton.Shutdown();
+        await LeaveLobby();
+    }
+    
+    public static async Task LeaveLobby() {
+        _heartbeatSource?.Cancel();
+        _updateLobbySource?.Cancel();
+
+        if (_currentLobby != null)
+            try {
+                if (_currentLobby.HostId == Authentication.PlayerId) await Lobbies.Instance.DeleteLobbyAsync(_currentLobby.Id);
+                else await Lobbies.Instance.RemovePlayerAsync(_currentLobby.Id, Authentication.PlayerId);
+                _currentLobby = null;
+            }
+            catch (Exception e) {
+                Debug.Log(e);
+            }
     }
 
     void UpdateLobby()
