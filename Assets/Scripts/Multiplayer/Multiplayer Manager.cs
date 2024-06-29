@@ -14,33 +14,43 @@ using Unity.Services.Relay.Models;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 
-public class MultiplayerManager : MonoBehaviour
+public class MultiplayerManager : NetworkBehaviour
 {
     private const int c_HeartbeatInterval = 15;
     private const int c_LobbyRefreshRate = 2;
     private const int c_MaxPlayers = 4;
     private const string c_JoinKey = "j";
+    private Dictionary<ulong, bool> _playersInLobby = new ();
+    public int PlayersInLobby { get { return _playersInLobby.Count; } }
     public static MultiplayerManager Instance;
     private static UnityTransport _transport;
     private static Lobby _currentLobby;   
     private static CancellationTokenSource _heartbeatSource, _updateLobbySource;
     public static event Action<Lobby> CurrentLobbyRefreshed;
-
+    public event LobbyUpdateHandler LobbyUpdated;
     void Awake()
-    {
-        _transport = FindObjectOfType<UnityTransport>();
-    }
-    void Start()
     {
         if (Instance != null) Destroy(this);
         Instance = this;
+        _transport = FindObjectOfType<UnityTransport>();
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback += clientConnected;
+            _playersInLobby.Add(NetworkManager.Singleton.LocalClientId, false);
+            UpdateLobby();
+        }
+
+        NetworkManager.Singleton.OnClientDisconnectCallback += clientDisconnected;
     }
 
     public async Task CreateGame()
     {
         Allocation a = await RelayService.Instance.CreateAllocationAsync(c_MaxPlayers);
         var joinCode = await RelayService.Instance.GetJoinCodeAsync(a.AllocationId);
-        Debug.Log(joinCode);
         
         var options = new CreateLobbyOptions {
             Data = new Dictionary<string, DataObject> {
@@ -111,4 +121,34 @@ public class MultiplayerManager : MonoBehaviour
 
         PeriodicallyRefreshLobby();
     }
+
+    void clientConnected(ulong playerId)
+    {
+        if (!IsServer) return;
+
+        if (!_playersInLobby.ContainsKey(playerId)) _playersInLobby.Add(playerId, false);
+
+        UpdateLobby();
+    }
+
+    void clientDisconnected(ulong playerId)
+    {
+        if (IsServer)
+        {
+            if (_playersInLobby.ContainsKey(playerId)) _playersInLobby.Remove(playerId);
+
+            UpdateLobby();
+            
+            return;
+        }
+
+        // todo leave lobby;
+    }
+
+    void UpdateLobby()
+    {
+        LobbyUpdated?.Invoke(PlayersInLobby);
+    }
+
+    public delegate void LobbyUpdateHandler(int playerCount);
 }

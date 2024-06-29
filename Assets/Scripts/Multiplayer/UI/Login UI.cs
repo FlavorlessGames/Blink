@@ -11,6 +11,7 @@ public class LoginUI : NetworkBehaviour
     private const string id_Insert = "body";
     private const string id_Header = "header";
     private const string id_Footer = "footer";
+    private const string c_lobbyPlayerText = "Players in Lobby: {0}/4";
 
     public UIDocument uiDocument;
     public SceneSelector Scenes;
@@ -29,6 +30,8 @@ public class LoginUI : NetworkBehaviour
         _footer = uiDocument.rootVisualElement.Q<VisualElement>(id_Footer);
         _header = uiDocument.rootVisualElement.Q<VisualElement>(id_Header);
         JoinScreen();
+
+        MultiplayerManager.Instance.LobbyUpdated += updateLobbyInfo;
     }
 
     void Update()
@@ -99,9 +102,10 @@ public class LoginUI : NetworkBehaviour
     public void StartGameScreen()
     {
         clear();
+        _currentScreen = Screen.StartGame;
         _footer.Add(new Label(string.Format("Selected Scene: {0}", _selectedScene)));
         Button start = newButton("Start Game", startGame);
-        _header.Add(new Label("Connected Players: 0/3 (currently not operational)"));
+        _header.Add(new Label(string.Format(c_lobbyPlayerText, 1)));
         _insert.Add(start);
     }
 
@@ -151,6 +155,15 @@ public class LoginUI : NetworkBehaviour
         _insert.Add(new Label("Waiting for Host to start Game"));
     }
 
+    private void updateLobbyInfo(int playerCount)
+    {
+        if (_currentScreen != Screen.StartGame) return;
+        
+        Debug.Log(playerCount);
+        _header.Clear();
+        _header.Add(new Label(string.Format(c_lobbyPlayerText, playerCount)));
+    }
+
     private void clear()
     {
         _insert.Clear();
@@ -162,5 +175,6 @@ public class LoginUI : NetworkBehaviour
     {
         None,
         Lobbies,
+        StartGame,
     }
 }
