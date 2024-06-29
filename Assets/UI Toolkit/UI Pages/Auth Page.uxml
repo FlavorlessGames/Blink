@@ -1,6 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Stylesheets/Basic%20Relay%20Page%20Style.uss?fileID=7433441132597879392&amp;guid=a23885d0a8f2cc54ebee19ba1d15ae07&amp;type=3#Basic Relay Page Style" />
-    <ui:VisualElement style="flex-grow: 1; justify-content: center;">
-        <ui:Button text="Login" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AuthButton" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 1; padding-top: 3%; padding-right: 3%; padding-bottom: 3%; padding-left: 3%; max-height: 33%;">
+            <ui:VisualElement name="header" style="flex-grow: 0; flex-direction: row; justify-content: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="body" style="flex-grow: 1; justify-content: center; min-height: 33%;" />
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; justify-content: flex-end; padding-top: 3%; padding-right: 3%; padding-bottom: 3%; padding-left: 3%; max-height: 33%;">
+            <ui:VisualElement name="footer" style="flex-grow: 0; flex-direction: row; justify-content: center; align-items: auto; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; align-self: auto;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -26,6 +26,7 @@ public class FlashlightLogic : NetworkBehaviour
     public override void OnNetworkSpawn() 
     {
         if (!IsOwner) return;
+        _stats = GetComponent<FlashlightStats>();
         _stats.TurnedOn = true;
     }
 

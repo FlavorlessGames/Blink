@@ -4,6 +4,7 @@ using UnityEngine;
 public class Lock : MonoBehaviour
 {
     public event LockHandler LockOpen;
+    public int Index;
     void Start()
     {
         Interactable i = GetComponent<Interactable>();

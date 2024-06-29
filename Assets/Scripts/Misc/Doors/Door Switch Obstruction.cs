@@ -1,34 +1,44 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Netcode;
 
 [RequireComponent(typeof(Door))]
-public class DoorSwitchObstruction : MonoBehaviour
+public class DoorSwitchObstruction : NetworkBehaviour
 {
     [SerializeField] private List<Lock> _locks;
     [SerializeField] private int _requiredLocks = 1;
-    private Dictionary<Lock, bool> _lockState;
+    private bool [] _lockStates;
     private Door _door;
     void Start()
     {
-        _lockState = new Dictionary<Lock, bool>();
         _door = GetComponent<Door>();
+        _lockStates = new bool [_locks.Count];
+        int index = 0;
         foreach (Lock l in _locks)
         {
             l.LockOpen += lockOpen;
-            _lockState[l] = false;
+            l.Index = index;
+            _lockStates[index] = false;
+            index ++;
         }
     }
 
     private void lockOpen(Lock l)
     {
-        _lockState[l] = true;
+        setLockStateRpc(l.Index, true);
         if (checkOpen()) _door.Open();
+    }
+
+    [Rpc(SendTo.Everyone)]
+    private void setLockStateRpc(int i, bool state)
+    {
+        _lockStates[i] = state;
     }
 
     private bool checkOpen()
     {
         int count = 0;
-        foreach (bool open in _lockState.Values)
+        foreach (bool open in _lockStates)
         {
             count += open ? 1 : 0;
             if (count >= _requiredLocks) return true;
