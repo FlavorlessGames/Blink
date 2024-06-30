@@ -10,6 +10,7 @@ public class StatueBase : MonoBehaviour
     [SerializeField] private UnityEngine.AI.NavMeshAgent _agent;
     private StatueBehavior _statueBehavior;
     public float DetectionRange { get { return _detectionDistance; } }
+    private bool _locked = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,19 @@ public class StatueBase : MonoBehaviour
 
     public void Resume()
     {
+        if (_locked) return;
         _agent.isStopped = false;
+    }
+
+    public void Lock()
+    {
+        _locked = true;
+        Stop();
+    }
+
+    public void Unlock()
+    {
+        _locked = false;
     }
 
     public void SetDestination(Vector3 destination)
