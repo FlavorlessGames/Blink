@@ -44,7 +44,7 @@ public class GameManager : NetworkBehaviour {
             Debug.Log("Spawn Point was not manually set. Searching for a player prefab in the scene");
             FindSpawnPoint();
         }
-        disablePlayerPrefabs();
+        if (IsHost) disablePlayerPrefabs();
         SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
     }   
 
