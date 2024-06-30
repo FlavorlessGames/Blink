@@ -9,8 +9,10 @@ using ParrelSync;
 public static class Authentication {
     public static string PlayerId { get; private set; }
 
-    public static async Task Login() {
-        if (UnityServices.State == ServicesInitializationState.Uninitialized) {
+    public static async Task Login()
+    {
+        if (UnityServices.State == ServicesInitializationState.Uninitialized) 
+        {
             var options = new InitializationOptions();
 
 
@@ -24,7 +26,8 @@ public static class Authentication {
             await UnityServices.InitializeAsync(options);
         }
 
-        if (!AuthenticationService.Instance.IsSignedIn) {
+        if (!AuthenticationService.Instance.IsSignedIn) 
+        {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
             PlayerId = AuthenticationService.Instance.PlayerId;
         }

@@ -64,24 +64,30 @@ public class MultiplayerManager : NetworkBehaviour
         PeriodicallyRefreshLobby();
     }
     
-    private static async void Heartbeat() {
+    private static async void Heartbeat() 
+    {
         _heartbeatSource = new CancellationTokenSource();
-        while (!_heartbeatSource.IsCancellationRequested && _currentLobby != null) {
+        while (!_heartbeatSource.IsCancellationRequested && _currentLobby != null) 
+        {
             await Lobbies.Instance.SendHeartbeatPingAsync(_currentLobby.Id);
             await Task.Delay(c_HeartbeatInterval * 1000);
         }
     }
     
-    private static async void PeriodicallyRefreshLobby() {
+    private static async void PeriodicallyRefreshLobby() 
+    {
         _updateLobbySource = new CancellationTokenSource();
         await Task.Delay(c_LobbyRefreshRate * 1000);
-        while (!_updateLobbySource.IsCancellationRequested && _currentLobby != null) {
+        while (!_updateLobbySource.IsCancellationRequested && _currentLobby != null) 
+        {
             _currentLobby = await Lobbies.Instance.GetLobbyAsync(_currentLobby.Id);
             CurrentLobbyRefreshed?.Invoke(_currentLobby);
             await Task.Delay(c_LobbyRefreshRate * 1000);
         }
     } 
-    private async Task<List<Lobby>> GatherLobbies() {
+
+    private async Task<List<Lobby>> GatherLobbies() 
+    {
         var options = new QueryLobbiesOptions {
             Count = 15,
 
@@ -151,7 +157,8 @@ public class MultiplayerManager : NetworkBehaviour
         await LeaveLobby();
     }
     
-    public static async Task LeaveLobby() {
+    public static async Task LeaveLobby() 
+    {
         _heartbeatSource?.Cancel();
         _updateLobbySource?.Cancel();
 
@@ -161,7 +168,8 @@ public class MultiplayerManager : NetworkBehaviour
                 else await Lobbies.Instance.RemovePlayerAsync(_currentLobby.Id, Authentication.PlayerId);
                 _currentLobby = null;
             }
-            catch (Exception e) {
+            catch (Exception e) 
+            {
                 Debug.Log(e);
             }
     }

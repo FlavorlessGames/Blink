@@ -17,7 +17,8 @@ public class AuthUI : MonoBehaviour
         _insert.Add(authButton);
     }
     
-    public async void LoginAnonymously() {
+    public async void LoginAnonymously() 
+    {
         setLoading();
         await Authentication.Login();
         Scenes.GoToMenu();

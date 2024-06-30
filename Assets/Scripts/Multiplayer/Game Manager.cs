@@ -35,7 +35,8 @@ public class GameManager : NetworkBehaviour {
         NetworkManager.Singleton.StartHost();
     }
 
-    public override void OnNetworkSpawn() {
+    public override void OnNetworkSpawn() 
+    {
         try
         {
             if (_spawnPoint.transform == null) FindSpawnPoint();
@@ -49,13 +50,15 @@ public class GameManager : NetworkBehaviour {
     }   
 
     [ServerRpc(RequireOwnership = false)]
-    private void SpawnPlayerServerRpc(ulong playerId) {
+    private void SpawnPlayerServerRpc(ulong playerId) 
+    {
         Transform sp = _spawnPoint.transform;
         GameObject spawn = (GameObject) Instantiate(_playerPrefab.gameObject, sp.position, sp.rotation);
         spawn.GetComponent<NetworkObject>().SpawnWithOwnership(playerId);
     }
 
-    public override void OnDestroy() {
+    public override void OnDestroy() 
+    {
         base.OnDestroy();
         if(NetworkManager.Singleton != null )NetworkManager.Singleton.Shutdown();
     }

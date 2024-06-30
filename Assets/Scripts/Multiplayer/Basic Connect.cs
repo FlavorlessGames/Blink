@@ -19,7 +19,8 @@ public class RelayExample : MonoBehaviour
     private UnityTransport _transport;
     private const int MaxPlayers = 5;
 
-    private async void Awake() {
+    private async void Awake() 
+    {
         _transport = FindObjectOfType<UnityTransport>();
         
         _buttons.SetActive(false);
@@ -29,12 +30,14 @@ public class RelayExample : MonoBehaviour
         _buttons.SetActive(true);
     }
 
-    private static async Task Authenticate() {
+    private static async Task Authenticate() 
+    {
         await UnityServices.InitializeAsync();
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
 
-    public async void CreateGame() {
+    public async void CreateGame() 
+    {
         _buttons.SetActive(false);
         
         Allocation a = await RelayService.Instance.CreateAllocationAsync(MaxPlayers);
@@ -45,7 +48,8 @@ public class RelayExample : MonoBehaviour
         NetworkManager.Singleton.StartHost();
     }
     
-    public async void JoinGame() {
+    public async void JoinGame() 
+    {
         _buttons.SetActive(false);
         
         JoinAllocation a = await RelayService.Instance.JoinAllocationAsync(_joinInput.text);
