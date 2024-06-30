@@ -20,14 +20,15 @@ public class GameManager : NetworkBehaviour {
         _spawnPoint = pm.gameObject;
     }
     
-    private void disablePlayerPrefabs()
-    {
-        PlayerMovement [] objs = (PlayerMovement []) FindObjectsOfType(typeof(PlayerMovement), true);
-        foreach (PlayerMovement pm in objs)
-        {
-            pm.gameObject.SetActive(false);
-        }
-    }
+    // [Rpc(SendTo.Everyone)]
+    // private void disablePlayerPrefabsRpc()
+    // {
+    //     PlayerMovement [] objs = (PlayerMovement []) FindObjectsOfType(typeof(PlayerMovement), true);
+    //     foreach (PlayerMovement pm in objs)
+    //     {
+    //         pm.gameObject.SetActive(false);
+    //     }
+    // }
 
     public void InitSingleplayer()
     {
@@ -44,7 +45,6 @@ public class GameManager : NetworkBehaviour {
             Debug.Log("Spawn Point was not manually set. Searching for a player prefab in the scene");
             FindSpawnPoint();
         }
-        if (IsHost) disablePlayerPrefabs();
         SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
     }   
 
