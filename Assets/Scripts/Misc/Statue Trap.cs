@@ -4,6 +4,12 @@ public class StatueTrap : MonoBehaviour
 {
     [SerializeField] private bool _armed;
     public event TrapTriggerHandler TrapTriggered;
+    private List<StatueBase> _lockedStatues;
+
+    void Start()
+    {
+        _lockedStatues = new List<StatueBase>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -16,7 +22,18 @@ public class StatueTrap : MonoBehaviour
     {
         if (!_armed) return;
         sb.Lock();
+        _lockedStatues.Add(sb);
         TrapTriggered?.Invoke();
+    }
+
+    public void FreeStatues()
+    {
+        foreach (StatueBase sb in _lockedStatues)
+        {
+            sb.Unlock();
+        }
+
+        _lockedStatues.Clear();
     }
 
     public void Arm()
@@ -27,6 +44,7 @@ public class StatueTrap : MonoBehaviour
     public void Disarm()
     {
         _armed = false;
+        FreeStatues();
     }
 
     public delegate void TrapTriggerHandler();
