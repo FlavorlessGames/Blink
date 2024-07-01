@@ -19,6 +19,7 @@ public class LoginUI : NetworkBehaviour
     private MainMenuPage _page;
     private MultiplayerScreen _multiScreen;
     private LobbySelectScreen _lobbyScreen;
+    private SelectSceneScreen _selectSceneScreen;
     private VisualElement _insert;
     private VisualElement _header;
     private VisualElement _footer;
@@ -70,13 +71,6 @@ public class LoginUI : NetworkBehaviour
         _multiScreen.CreateGame += createLobby;
     } 
 
-    private Button newButton(string label, Action clickEvent)
-    {
-        Button nb = new Button(clickEvent);
-        nb.text = label;
-        return nb;
-    }
-
     private async void createLobby()
     {
         setLoading();
@@ -94,24 +88,18 @@ public class LoginUI : NetworkBehaviour
         }
         _lobbyScreen = new LobbySelectScreen(_page);
         _lobbyScreen.LobbySelected += selectLobby;
-        // _insert.Clear();
-        // List<string> ids = new List<string>{"Test"};
-        // Label title = new Label("Lobbies");
-        // _insert.Add(title);
-        // _currentScreen = Screen.Lobbies;
-        // _lobbyElement = new VisualElement();
-        // _insert.Add(_lobbyElement);
         refreshLobbies();
     }
 
     public void SelectSceneScreen()
     {
-        clear();
-        _header.Add(new Label("Select a Scene"));
-        foreach (string name in Scenes.SceneNames())
+        if (_selectSceneScreen != null)
         {
-            _insert.Add(newButton(name, () => {setScene(name);}));
+            _selectSceneScreen.Activate(_page);
+            return;
         }
+        _selectSceneScreen = new SelectSceneScreen(_page, Scenes.SceneNames());
+        _selectSceneScreen.SceneSelected += setScene;
     }
 
     public void StartGameScreen()
@@ -119,7 +107,7 @@ public class LoginUI : NetworkBehaviour
         clear();
         _currentScreen = Screen.StartGame;
         _footer.Add(new Label(string.Format("Selected Scene: {0}", _selectedScene)));
-        Button start = newButton("Start Game", startGame);
+        Button start = Utils.NewButton("Start Game", startGame);
         _header.Add(new Label(string.Format(c_lobbyPlayerText, MultiplayerManager.Instance.PlayersInLobby)));
         _insert.Add(start);
     }
@@ -148,13 +136,6 @@ public class LoginUI : NetworkBehaviour
     private void refreshLobbies()
     {
         _lobbyScreen.Refresh();
-        // List<LobbyDetails> lds = await MultiplayerManager.Instance.FetchLobbies();
-        // _lobbyElement.Clear();
-        // foreach (LobbyDetails ld in lds)
-        // {
-        //     Button lobby = newButton(ld.ToString(), () => {selectLobby(ld.ID);});
-        //     _lobbyElement.Add(lobby);
-        // }
     }
 
     private async void selectLobby(string id)
