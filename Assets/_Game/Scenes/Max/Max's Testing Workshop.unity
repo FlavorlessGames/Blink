@@ -2876,6 +2876,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3272327579
       objectReference: {fileID: 0}
+    - target: {fileID: 2094726156845071024, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: _resetOnDeath
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2409999600330074846, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 101.09652
