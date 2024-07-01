@@ -15,11 +15,11 @@ public class EntityManager : MonoBehaviour
     {
         if (Instance != null) Destroy(this);
         Instance = this;
+        _livingPlayers = new List<PlayerAccess>();
     }
 
     void Start()
     {
-        _livingPlayers = new List<PlayerAccess>();
         _playerPositions = new Dictionary<PlayerAccess, Vector3>();
         _enemyPositions = new Dictionary<EnemyAccess, Vector3>();
         _targeting = new Dictionary<EnemyAccess, PlayerAccess>();
