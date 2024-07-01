@@ -1,15 +1,19 @@
 using Unity.Netcode;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour {
     [SerializeField] private PlayerMovement _playerPrefab;
     [SerializeField] private GameObject _spawnPoint;
+    [SerializeField] private bool _resetOnDeath;
+    public static GameManager Instance;
 
     void Start()
     {
+        if (Instance != null) Destroy(this);
+        Instance = this;
         if (!IsSpawned) InitSingleplayer(); // Todo: make this safer
-       
     }
 
     public void FindSpawnPoint()
@@ -61,5 +65,13 @@ public class GameManager : NetworkBehaviour {
     {
         base.OnDestroy();
         if(NetworkManager.Singleton != null )NetworkManager.Singleton.Shutdown();
+    }
+
+    public void AllPlayersKilled()
+    {
+        if (!_resetOnDeath) return;
+        if (!IsHost) return;
+        Scene currentScene = SceneManager.GetActiveScene();
+        NetworkManager.Singleton.SceneManager.LoadScene(currentScene.name, LoadSceneMode.Single);
     }
 }

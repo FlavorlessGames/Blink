@@ -9,31 +9,31 @@ EditorBuildSettings:
     path: Assets/Scenes/Core/Main Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/z_Archived/TestLevel1.unity
+    path: Assets/_Game/Scenes/z_Archived/TestLevel1.unity
     guid: c4c99a306cbf74174b7be9bd73748d62
   - enabled: 1
-    path: Assets/Scenes/_Core/Main Menu.unity
+    path: Assets/_Game/Scenes/_Core/Main Menu.unity
     guid: 67b1b1b9ca36b5f4ca6f58696a880552
   - enabled: 1
     path: Assets/Scenes/Multiplayer Scenes/Multiplayer Menu.unity
     guid: 8bdab783eb8874d4eb9400cb0793f111
   - enabled: 1
-    path: Assets/Scenes/Max/Max's Testing Workshop.unity
+    path: Assets/_Game/Scenes/Max/Max's Testing Workshop.unity
     guid: 4babaa94f6f750f4fb73d8a0b58f4fdc
   - enabled: 1
-    path: Assets/Scenes/_Core/Reference/Example Scene.unity
+    path: Assets/_Game/Scenes/_Core/Reference/Example Scene.unity
     guid: aa0df26f820e04e4e9fb6863adafc665
   - enabled: 1
-    path: Assets/Scenes/Giacomo/Test Levels/TestLevelTiling.unity
+    path: Assets/_Game/Scenes/Giacomo/Test Levels/TestLevelTiling.unity
     guid: 4263d016f1b6a4fd99df8e7fa33c9bf8
   - enabled: 1
-    path: Assets/Scenes/Giacomo/Cloisters.unity
+    path: Assets/_Game/Scenes/Giacomo/Cloisters.unity
     guid: 1c4464a08855a42818d9d410d7ce4e20
   - enabled: 1
-    path: Assets/Scenes/_Core/Reference/Scene Template.unity
+    path: Assets/_Game/Scenes/_Core/Reference/Scene Template.unity
     guid: 4449ff02eee795c49b0eeacb4ac26ee3
   - enabled: 1
-    path: Assets/Scenes/Nathan/Nathan Scene.unity
+    path: Assets/_Game/Scenes/Nathan/Nathan Scene.unity
     guid: f61e47ef1bfdc8b4db195a321efcd786
   - enabled: 1
     path: Assets/Scenes/Singleplayer Scenes/Giacomo Levels/Hall of Columns 1.unity
@@ -42,9 +42,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Multiplayer Scenes/Max First Scene.unity
     guid: d6f9427121fce1646a5211b6aba806c7
   - enabled: 1
-    path: Assets/Scenes/Giacomo/Multiplayer Level Testing.unity
+    path: Assets/_Game/Scenes/Giacomo/Multiplayer Level Testing.unity
     guid: 31105b44a30241541b7b5da23c907bf1
   - enabled: 1
-    path: Assets/Scenes/_Core/Start With This Scene.unity
+    path: Assets/_Game/Scenes/_Core/Start With This Scene.unity
     guid: 0ea63483cce1c794c849cc4ba46da8bd
   m_configObjects: {}

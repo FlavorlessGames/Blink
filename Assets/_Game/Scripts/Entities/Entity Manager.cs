@@ -9,20 +9,34 @@ public class EntityManager : MonoBehaviour
     private Dictionary<PlayerAccess, Vector3> _playerPositions;
     private Dictionary<EnemyAccess, Vector3> _enemyPositions;
     private Dictionary<EnemyAccess, PlayerAccess> _targeting;
+    private List<PlayerAccess> _livingPlayers;
 
-    void Start()
+    void Awake()
     {
         if (Instance != null) Destroy(this);
         Instance = this;
+    }
+
+    void Start()
+    {
+        _livingPlayers = new List<PlayerAccess>();
         _playerPositions = new Dictionary<PlayerAccess, Vector3>();
         _enemyPositions = new Dictionary<EnemyAccess, Vector3>();
         _targeting = new Dictionary<EnemyAccess, PlayerAccess>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayerKilled(PlayerAccess pa)
     {
-        
+        if (!_livingPlayers.Contains(pa)) return;
+        _livingPlayers.Remove(pa);
+        if (_livingPlayers.Count > 0) return;
+        GameManager.Instance.AllPlayersKilled();
+    }
+
+    public void AddLiving(PlayerAccess pa)
+    {
+        if (_livingPlayers.Contains(pa)) return;
+        _livingPlayers.Add(pa);
     }
 
     public void UpdatePosition(PlayerAccess playerPosition, Vector3 location)
