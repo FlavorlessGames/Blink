@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af04323aec501744ca7d2c83e012f3d3, type: 3}
+  m_Name: BasicWallSet
+  m_EditorClassIdentifier: 
+  TileSize: 4
+  FloorTile:
+    prefab: {fileID: 4657146851598328594, guid: 975cef3ddcf110d49a824e7389b5bc0a, type: 3}
+    Rotations: 0
+  LineWallTile:
+    prefab: {fileID: 3880964430187989769, guid: 381f4efc21cbfe64cbc58acb741da0c6, type: 3}
+    Rotations: 0
+  CornerWallTile:
+    prefab: {fileID: 2408357766194495578, guid: 5a02729ca5cc2c047a42d83f31e20a7e, type: 3}
+    Rotations: 0
+  TWallTile:
+    prefab: {fileID: 7657456636325885171, guid: f0e7d5c11a88eca45a45d6be62438a57, type: 3}
+    Rotations: 1
+  XWallTile:
+    prefab: {fileID: 2349681120795177779, guid: e24d5a4e731ea9b4498cdab966a71ca7, type: 3}
+    Rotations: 0
+  ColumnTile:
+    prefab: {fileID: 4443738277731834024, guid: ea5d6e6069298494ebe3a7d9201a0b2e, type: 3}
+    Rotations: 0
+  EndWallTile:
+    prefab: {fileID: 7223742321738891279, guid: 528102ac49aada6439f06cccb26cfd3b, type: 3}
+    Rotations: 3
+  DoorTile:
+    prefab: {fileID: 3781203399475048820, guid: 049492f59d8ac40668aedcc8f446977d, type: 3}
+    Rotations: 2
