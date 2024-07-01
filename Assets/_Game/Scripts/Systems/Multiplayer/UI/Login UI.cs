@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using System;
+using fgames.Menus;
 
 public class LoginUI : NetworkBehaviour
 {
@@ -15,6 +16,9 @@ public class LoginUI : NetworkBehaviour
 
     public UIDocument uiDocument;
     public SceneSelector Scenes;
+    private MainMenuPage _page;
+    private MultiplayerScreen _multiScreen;
+    private LobbySelectScreen _lobbyScreen;
     private VisualElement _insert;
     private VisualElement _header;
     private VisualElement _footer;
@@ -26,6 +30,7 @@ public class LoginUI : NetworkBehaviour
 
     void Start()
     {
+        _page = new MainMenuPage(uiDocument.rootVisualElement);
         _insert = uiDocument.rootVisualElement.Q<VisualElement>(id_Insert);
         _footer = uiDocument.rootVisualElement.Q<VisualElement>(id_Footer);
         _header = uiDocument.rootVisualElement.Q<VisualElement>(id_Header);
@@ -55,11 +60,14 @@ public class LoginUI : NetworkBehaviour
 
     public void JoinScreen()
     {
-        _insert.Clear();
-        Button join = newButton("Join Game", LobbyPanel);
-        _insert.Add(join);
-        Button create = newButton("Create Game", createLobby);
-        _insert.Add(create);
+        if (_multiScreen != null)
+        {
+            _multiScreen.Activate(_page);
+            return;
+        }
+        _multiScreen = new MultiplayerScreen(_page);
+        _multiScreen.JoinGame += LobbyPanel;
+        _multiScreen.CreateGame += createLobby;
     } 
 
     private Button newButton(string label, Action clickEvent)
@@ -79,13 +87,20 @@ public class LoginUI : NetworkBehaviour
 
     public void LobbyPanel()
     {
-        _insert.Clear();
-        List<string> ids = new List<string>{"Test"};
-        Label title = new Label("Lobbies");
-        _insert.Add(title);
-        _currentScreen = Screen.Lobbies;
-        _lobbyElement = new VisualElement();
-        _insert.Add(_lobbyElement);
+        if (_lobbyScreen != null)
+        {
+            _lobbyScreen.Activate(_page);
+            return;
+        }
+        _lobbyScreen = new LobbySelectScreen(_page);
+        _lobbyScreen.LobbySelected += selectLobby;
+        // _insert.Clear();
+        // List<string> ids = new List<string>{"Test"};
+        // Label title = new Label("Lobbies");
+        // _insert.Add(title);
+        // _currentScreen = Screen.Lobbies;
+        // _lobbyElement = new VisualElement();
+        // _insert.Add(_lobbyElement);
         refreshLobbies();
     }
 
@@ -130,15 +145,16 @@ public class LoginUI : NetworkBehaviour
         _insert.Add(loading);
     }
 
-    private async void refreshLobbies()
+    private void refreshLobbies()
     {
-        List<LobbyDetails> lds = await MultiplayerManager.Instance.FetchLobbies();
-        _lobbyElement.Clear();
-        foreach (LobbyDetails ld in lds)
-        {
-            Button lobby = newButton(ld.ToString(), () => {selectLobby(ld.ID);});
-            _lobbyElement.Add(lobby);
-        }
+        _lobbyScreen.Refresh();
+        // List<LobbyDetails> lds = await MultiplayerManager.Instance.FetchLobbies();
+        // _lobbyElement.Clear();
+        // foreach (LobbyDetails ld in lds)
+        // {
+        //     Button lobby = newButton(ld.ToString(), () => {selectLobby(ld.ID);});
+        //     _lobbyElement.Add(lobby);
+        // }
     }
 
     private async void selectLobby(string id)
