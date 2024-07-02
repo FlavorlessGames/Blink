@@ -74,6 +74,7 @@ public class PlayerInteraction : NetworkBehaviour
     private void interact()
     {
         if (_current == null) return;
+        Debug.Log("Interact");
         _current.Interact(this);
     }
 
