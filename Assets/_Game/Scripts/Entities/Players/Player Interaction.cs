@@ -6,6 +6,7 @@ using System.Linq;
 
 public class PlayerInteraction : NetworkBehaviour
 {
+    public event GenericHandler CloseUI;
     [SerializeField] private GameObject _camera;
     private Camera _cam;
     private Vector3 _screenCenter;
@@ -35,6 +36,10 @@ public class PlayerInteraction : NetworkBehaviour
         if (Input.GetButtonDown("Interact"))
         {
             interact();
+        }
+        if (Input.GetButtonDown("Close UI"))
+        {
+            CloseUI?.Invoke();
         }
     }
 
@@ -82,3 +87,5 @@ public class PlayerInteraction : NetworkBehaviour
         return GetComponent<FlashlightLogic>().PickupBattery();
     }
 }
+
+public delegate void GenericHandler();
