@@ -10,13 +10,11 @@ public class InteractableLock : MonoBehaviour
     {
         _lock = GetComponent<Lock>();
         Interactable interactable = GetComponent<Interactable>();
-        Debug.Log(interactable);
         interactable.InteractEvent += lockOpen;
     }
 
     private void lockOpen(PlayerInteraction pi)
     {
-        Debug.Log("interact open");
         _lock.Open();
     }
 }

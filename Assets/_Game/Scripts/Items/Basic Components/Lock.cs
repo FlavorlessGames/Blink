@@ -7,7 +7,6 @@ public class Lock : MonoBehaviour
 
     public void Open()
     {
-        Debug.Log(Index);
         LockOpen?.Invoke(this);
     }
 

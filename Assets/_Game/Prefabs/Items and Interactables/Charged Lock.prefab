@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _range: 10
-  _chargeMax: 0
-  _decayDelay: 0
+  _chargeMax: 1.3
+  _decayDelay: 0.2
 --- !u!114 &4573222638301921122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,9 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3afccdb3f4b7c54d8f8721e03c2bc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 15
+  _speed: 0
   _rotation: {x: 0, y: 1, z: 0}
-  _spinning: 0
+  _spinning: 1
 --- !u!114 &4418798702513256926
 MonoBehaviour:
   m_ObjectHideFlags: 0
