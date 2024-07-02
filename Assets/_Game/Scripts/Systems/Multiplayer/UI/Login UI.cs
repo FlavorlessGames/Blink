@@ -81,6 +81,7 @@ public class LoginUI : NetworkBehaviour
 
     public void LobbyPanel()
     {
+        _currentScreen = Screen.Lobbies;
         if (_lobbyScreen != null)
         {
             _lobbyScreen.Activate(_page);

@@ -1,17 +1,11 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Interactable))]
 public class Lock : MonoBehaviour
 {
     public event LockHandler LockOpen;
     public int Index;
-    void Start()
-    {
-        Interactable i = GetComponent<Interactable>();
-        i.InteractEvent += lockOpen;
-    }
 
-    private void lockOpen(PlayerInteraction player)
+    public void Open()
     {
         LockOpen?.Invoke(this);
     }
