@@ -57,6 +57,28 @@ public class FlashlightStats : NetworkBehaviour
     }
     private float _localBattery;
     private NetworkVariable<float> _networkBattery = new NetworkVariable<float>();
+    public float SecondaryBattery 
+    {
+        get { return IsOwner ? _localSecondaryBattery : _networkSecondaryBattery.Value; }
+        set 
+        {
+            _localSecondaryBattery = value;
+            setSecondaryBatteryRpc(value);
+        }
+    }
+    private float _localSecondaryBattery;
+    private NetworkVariable<float> _networkSecondaryBattery = new NetworkVariable<float>();
+    public FlashlightChargeType CurrentChargeType
+    {
+        get { return IsOwner ? _localCurrentChargeType : _networkCurrentChargeType.Value; }
+        set
+        {
+            _localCurrentChargeType = value;
+            setCurrentChargeTypeRpc(value);
+        }
+    }
+    private FlashlightChargeType _localCurrentChargeType;
+    private NetworkVariable<FlashlightChargeType> _networkCurrentChargeType = new NetworkVariable<FlashlightChargeType>();
     public float CurrentAngle 
     {
         get { return IsOwner ? _localAngle : _networkAngle.Value; }
@@ -115,5 +137,17 @@ public class FlashlightStats : NetworkBehaviour
     private void setAngleRpc(float angleValue)
     {
         _networkAngle.Value = angleValue;
+    }
+
+    [Rpc(SendTo.Server)]
+    private void setCurrentChargeTypeRpc(FlashlightChargeType flt)
+    {
+        _networkCurrentChargeType.Value = flt;
+    }
+
+    [Rpc(SendTo.Server)]
+    private void setSecondaryBatteryRpc(float batteryValue)
+    {
+        _networkSecondaryBattery.Value = batteryValue;
     }
 }
