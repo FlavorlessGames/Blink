@@ -9,7 +9,7 @@ public class FlashlightLogic : NetworkBehaviour
     [SerializeField] private Light _flashlight;
     [SerializeField] private Camera _cam;
     [SerializeField] private PositionalAudio _audio;
-    public bool Debug = false;
+    public bool DebugFlag = false;
     private bool _flickering = false;
     private float _flickerTimer;
     private int _batteryPacks = 0;
@@ -21,6 +21,7 @@ public class FlashlightLogic : NetworkBehaviour
     private void Start()
     {
         _stats = GetComponent<FlashlightStats>();
+        FlameColors.Standard = _flashlight.color;
     }
 
     public override void OnNetworkSpawn() 
@@ -37,6 +38,7 @@ public class FlashlightLogic : NetworkBehaviour
         if (!IsOwner) return;
 
         batteryLevel();
+        secondaryBatteryLevel();
         if (_flickering) flicker();
         if (PauseManager.Instance.IsPaused) return;
 
@@ -46,8 +48,16 @@ public class FlashlightLogic : NetworkBehaviour
         if (Input.GetButtonDown("Recharge")) chargeBattery();
         if (Input.GetButtonUp("Recharge")) cancelCharge();
         if (Input.GetButtonDown("Drop")) dropHeldBattery();
+        if (Input.GetButtonDown("Swap Flame")) swapFlame();
     }
 
+    private void swapFlame()
+    {
+        Debug.Log("Swapping Flame");
+        _stats.SecondaryActive = !_stats.SecondaryActive;
+        if (_stats.SecondaryActive) _flashlight.color = FlameColors.GetColor(_stats.FlameColor);
+        else _flashlight.color = FlameColors.Standard;
+    }
 
     private void flashlightUnfocus()
     {
@@ -70,6 +80,15 @@ public class FlashlightLogic : NetworkBehaviour
 
         updateBatteryLevel();
         checkFlickering();
+    }
+
+    private void secondaryBatteryLevel()
+    {
+        if (!_stats.On || !_stats.SecondaryActive) return;
+        HUDManager.Instance.SetSecondaryBatteryLevel(100 * _stats.SecondaryBattery / _stats.MaxBattery);
+        if (_stats.SecondaryActive) _stats.SecondaryBattery -= Time.deltaTime;
+        if (_stats.SecondaryBattery > 0) return;
+        swapFlame();
     }
 
     private void checkFlickering()
@@ -134,7 +153,8 @@ public class FlashlightLogic : NetworkBehaviour
 
     private void chargeBattery()
     {
-        if (!sufficientBatteryPacksCheck() && !Debug) return;
+        Debug.Log("charge");
+        if (!sufficientBatteryPacksCheck() && !DebugFlag) return;
         cancelCharge();
         _chargingCoroutine = StartCoroutine(chargeTimer());
     }

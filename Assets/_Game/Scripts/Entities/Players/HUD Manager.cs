@@ -10,9 +10,11 @@ public class HUDManager : MonoBehaviour
     public static HUDManager Instance;
     [SerializeField] private GameObject _batteryText;
     [SerializeField] private GameObject _batteryPackCount;
+    [SerializeField] private GameObject _secondaryBatteryText;
     [SerializeField] private UIDocument _chargeBar;
     private TMP_Text _textMesh;
     private TMP_Text _textMeshBC;
+    private TMP_Text _textMeshSBL;
     private ProgressBar _chargeDisplay;
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,8 @@ public class HUDManager : MonoBehaviour
         if (_textMesh == null) throw new Exception("Text Mesh Element not found");
         _textMeshBC = _batteryPackCount.GetComponent<TMP_Text>();
         if (_textMeshBC == null) throw new Exception("Text Mesh Element not found");
+        _textMeshSBL = _secondaryBatteryText.GetComponent<TMP_Text>();
+        if (_textMeshSBL == null) throw new Exception("Text Mesh Element not found");
         _chargeDisplay = _chargeBar.rootVisualElement.Q<ProgressBar>(name: "progress_bar");
     }
 
@@ -34,6 +38,12 @@ public class HUDManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetSecondaryBatteryLevel(float level)
+    {
+        int intLevel = (int) level;
+        _textMeshSBL.text = intLevel.ToString();
     }
 
     public void SetBatteryLevel(float level)
