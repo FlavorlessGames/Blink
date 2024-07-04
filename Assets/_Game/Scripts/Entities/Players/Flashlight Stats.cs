@@ -68,17 +68,17 @@ public class FlashlightStats : NetworkBehaviour
     }
     private float _localSecondaryBattery;
     private NetworkVariable<float> _networkSecondaryBattery = new NetworkVariable<float>();
-    public FlashlightChargeType CurrentChargeType
+    public bool SecondaryActive 
     {
-        get { return IsOwner ? _localCurrentChargeType : _networkCurrentChargeType.Value; }
+        get { return IsOwner ? _localSecondaryActive: _networkSecondaryActive.Value; }
         set
         {
-            _localCurrentChargeType = value;
-            setCurrentChargeTypeRpc(value);
+            _localSecondaryActive= value;
+            setSecondaryActiveRpc(value);
         }
     }
-    private FlashlightChargeType _localCurrentChargeType;
-    private NetworkVariable<FlashlightChargeType> _networkCurrentChargeType = new NetworkVariable<FlashlightChargeType>();
+    private bool _localSecondaryActive;
+    private NetworkVariable<bool> _networkSecondaryActive= new NetworkVariable<bool>();
     public float CurrentAngle 
     {
         get { return IsOwner ? _localAngle : _networkAngle.Value; }
@@ -101,12 +101,30 @@ public class FlashlightStats : NetworkBehaviour
     }
     private float _localRange;
     private NetworkVariable<float> _networkRange = new NetworkVariable<float>();
+    public FlameColor FlameColor
+    {
+        get { return IsOwner ? _localColor : _networkColor.Value; }
+        set
+        {
+            _localColor = value;
+            setColorRpc(value);
+        }
+    }
+    private FlameColor _localColor;
+    private NetworkVariable<FlameColor> _networkColor = new NetworkVariable<FlameColor>();
 
     void Start()
     {
         CurrentAngle = WideAngle;
         CurrentBattery = MaxBattery;
         CurrentRange = WideRange;
+        SecondaryBattery = MaxBattery;
+    }
+
+    [Rpc(SendTo.Server)]
+    private void setColorRpc(FlameColor fc)
+    {
+        _networkColor.Value = fc;
     }
 
     [Rpc(SendTo.Server)]
@@ -140,9 +158,9 @@ public class FlashlightStats : NetworkBehaviour
     }
 
     [Rpc(SendTo.Server)]
-    private void setCurrentChargeTypeRpc(FlashlightChargeType flt)
+    private void setSecondaryActiveRpc(bool flt)
     {
-        _networkCurrentChargeType.Value = flt;
+        _networkSecondaryActive.Value = flt;
     }
 
     [Rpc(SendTo.Server)]
