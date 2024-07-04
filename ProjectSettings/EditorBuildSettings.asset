@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/_Core/Start With This Scene.unity
     guid: 0ea63483cce1c794c849cc4ba46da8bd
+  - enabled: 1
+    path: Assets/_Game/Scenes/Giacomo/Dormitory.unity
+    guid: 0cb4862a5bed940a09317e2e971f4e3a
   m_configObjects: {}
