@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; justify-content: center; align-self: auto;">
+        <ui:GroupBox style="align-self: center;">
+            <ui:ProgressBar value="0" title="Charging" name="progress_bar" style="opacity: 0.65; visibility: hidden; font-size: 20%;" />
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>
