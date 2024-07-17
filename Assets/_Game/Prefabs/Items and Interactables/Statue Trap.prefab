@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3382256247674596370}
   - component: {fileID: 3264182362823619989}
   - component: {fileID: 2696598276609624219}
+  - component: {fileID: 4052149567171632596}
+  - component: {fileID: 6366042061968336412}
   m_Layer: 0
   m_Name: Statue Trap
   m_TagString: Untagged
@@ -29,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3450192863461450008}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -101.98377, y: -145.70985, z: -28.444876}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
@@ -147,3 +149,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4052149567171632596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3450192863461450008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf729b26edc0ff4a8d9cb0aea732000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Index: 0
+--- !u!114 &6366042061968336412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3450192863461450008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa508aa1b2136a941bd4772dca414098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
