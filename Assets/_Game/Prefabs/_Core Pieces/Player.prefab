@@ -275,7 +275,7 @@ MonoBehaviour:
   MaxBattery: 50
   LowBattery: 10
   FocusAngle: 30
-  FocusRange: 85
+  FocusRange: 50
   WideAngle: 100
   WideRange: 20
   LerpDuration: 0.3
