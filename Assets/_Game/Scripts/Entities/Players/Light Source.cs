@@ -34,7 +34,7 @@ public class LightSource : MonoBehaviour
     private void detectWithLightPoint(Vector3 enemyPosition)
     {
         if (!Utility.InRange(transform.position, enemyPosition, _light.range)) return;
-        LightDetection detectable = rayCastCheck(enemyPosition);
+        LightDetection detectable = hasLineOfSight(enemyPosition);
         if (detectable == null) return;
         detectable.Spotted();
     }
@@ -52,7 +52,7 @@ public class LightSource : MonoBehaviour
     private void detectWithLight(Vector3 enemyPosition)
     {
         if (!inFlashlightCone(enemyPosition)) return;
-        LightDetection detectable = rayCastCheck(enemyPosition);
+        LightDetection detectable = hasLineOfSight(enemyPosition);
         if (detectable == null) return;
         detectable.Spotted();
     }
@@ -64,6 +64,34 @@ public class LightSource : MonoBehaviour
         Vector3 point2 = enemyPosition - _light.transform.position;
         if (Vector3.Angle(point1, point2) > _light.spotAngle / 2f) return false;
         return true;
+    }
+
+    private LightDetection hasLineOfSight(Vector3 enemyPosition)
+    {
+        Vector3 direction = (enemyPosition - _light.transform.position).normalized;
+        LineOfSightDetection losd = rayCastLineOfSight(direction);
+        return losd.Entity;
+    }
+
+    private LineOfSightDetection rayCastLineOfSight(Vector3 direction)
+    {
+        RaycastHit[] hits;
+        LineOfSightDetection losd = new LineOfSightDetection(false, false);
+        hits = Physics.RaycastAll(_light.transform.position, direction, _light.range);
+        for (int i=0; i<hits.Length; i++)
+        {
+            RaycastHit hit = hits[i];
+            LightDetection ld = hit.transform.GetComponent<LightDetection>();
+
+            if (ld != null)
+            {
+                losd.Entity = ld;
+                losd.InBounds = true;
+                losd.CanSee = i == 0;
+                return losd;
+            }
+        }
+        return losd;
     }
 
     private LightDetection rayCastCheck(Vector3 enemyPosition)
@@ -79,4 +107,24 @@ public class LightSource : MonoBehaviour
         return null;
     }
 
+    private struct LineOfSightDetection
+    {
+        public bool CanSee;
+        public bool InBounds;
+        public LightDetection Entity;
+
+        public LineOfSightDetection(bool canSee, bool inBounds)
+        {
+            this.CanSee = canSee;
+            this.InBounds = inBounds;
+            this.Entity = null;
+        }
+
+        public override string ToString()
+        {
+            string s = CanSee ? "Can" : "Can Not";
+            string b = InBounds ? "In" : "Out of";
+            return string.Format("{0} See, {1} Bounds", s, b);
+        }
+    }
 }
