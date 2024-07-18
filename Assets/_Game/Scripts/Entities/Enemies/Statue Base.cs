@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class StatueBase : MonoBehaviour
 {
+    [Range(1f, 100f)]
     [SerializeField] private float _detectionDistance = 100f;
     // [SerializeField] private bool _stopped = false;
     [SerializeField] private UnityEngine.AI.NavMeshAgent _agent;
@@ -21,6 +22,12 @@ public class StatueBase : MonoBehaviour
         if (lightDetection == null) return;
         lightDetection.SpottedEvent += Stop;
         lightDetection.EyesAvertedEvent += Resume;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _detectionDistance);
     }
 
     public void Stop()

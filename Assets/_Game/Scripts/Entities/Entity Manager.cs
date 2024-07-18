@@ -92,6 +92,7 @@ public class EntityManager : MonoBehaviour
     public Vector3 GetPath(EnemyAccess ea)
     {
         PlayerAccess pa = _targeting[ea];
+        if (pa == null) return Vector3.zero;
         EnemyAccess closest = getClosestEnemy(pa);
         if (closest == ea) return pa.Position;
         if (!ea.CanSee(closest)) return pa.Position;
@@ -137,6 +138,7 @@ public class EntityManager : MonoBehaviour
 
     private float getDistance(PlayerAccess pa, EnemyAccess ea)
     {
+        Debug.Assert(pa != null);
         return Vector3.Distance(ea.Position, pa.Position);
     }
 }
