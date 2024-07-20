@@ -14,7 +14,7 @@ public class EnemyAccess : MonoBehaviour
     public void updatePostion()
     {
         if (EntityManager.Instance == null) return;
-        EntityManager.Instance.UpdatePosition(this, transform.position);
+        EntityManager.Instance.UpdatePosition(this, transform.position + Vector3.up * 1f);
     }
 
     public bool CanSee(EnemyAccess ea)
