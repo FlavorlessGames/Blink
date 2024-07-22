@@ -16,6 +16,7 @@ public class FlashlightLogic : NetworkBehaviour
     private Coroutine _lerpCoroutine;
     private Coroutine _chargingCoroutine;
     private FlashlightStats _stats;
+    private float _focusTimer = 0f;
     public GameObject BatteryPackPrefab;
 
     private void Start()
@@ -37,6 +38,7 @@ public class FlashlightLogic : NetworkBehaviour
         castFocusedBeam();
         if (!IsOwner) return;
 
+        updateFocusTimer();
         batteryLevel();
         secondaryBatteryLevel();
         if (_flickering) flicker();
@@ -64,13 +66,32 @@ public class FlashlightLogic : NetworkBehaviour
         _audio.Play("Flashlight Unfocus");
         if (_lerpCoroutine != null) StopCoroutine(_lerpCoroutine);
         _lerpCoroutine = StartCoroutine(LerpLight(_stats.WideAngle, _stats.WideRange));
+        if (!focusOnCooldown()) startFocusCooldown();
     }
 
     private void flashlightFocus()
     {
+        if (focusOnCooldown()) return;
         _audio.Play("Flashlight Focus");
         if (_lerpCoroutine != null) StopCoroutine(_lerpCoroutine);
         _lerpCoroutine = StartCoroutine(LerpLight(_stats.FocusAngle, _stats.FocusRange));
+    }
+
+    private bool focusOnCooldown()
+    {
+        if (DebugFlag) return false;
+        return _focusTimer > 0;
+    }
+
+    private void startFocusCooldown()
+    {
+        _focusTimer = _stats.FocusCooldown;
+    }
+
+    private void updateFocusTimer()
+    {
+        if (_focusTimer < 0) return;
+        _focusTimer -= Time.deltaTime;
     }
 
     private void batteryLevel()
