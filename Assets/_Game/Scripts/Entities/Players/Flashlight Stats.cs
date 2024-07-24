@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using UnityEngine;
 
 public class FlashlightStats : NetworkBehaviour
 {
@@ -9,6 +10,9 @@ public class FlashlightStats : NetworkBehaviour
 
     public float FocusAngle = 30f;
     public float FocusRange = 85f;
+
+    [Range(0f, .5f)]
+    public float FocusCooldown = 0.5f;
 
     public float WideAngle = 100f;
     public float WideRange = 20f;
