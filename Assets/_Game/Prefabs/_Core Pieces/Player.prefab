@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _light: {fileID: 916803265524365320}
+  Visualize: 0
 --- !u!114 &6959703446703277039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,15 +273,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FlickerInterval: 0.4
-  MaxBattery: 50
+  MaxBattery: 100
   LowBattery: 10
   FocusAngle: 30
   FocusRange: 50
+  FocusCooldown: 0.5
   WideAngle: 100
   WideRange: 20
   LerpDuration: 0.3
   ReplaceBatteryDuration: 2
-  MaxBatteryCarryingCapacity: 1
+  MaxBatteryCarryingCapacity: 2
 --- !u!114 &7586382401356242704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,7 +482,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
