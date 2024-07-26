@@ -21,7 +21,7 @@ public class AuthUI : MonoBehaviour
     {
         setLoading();
         await Authentication.Login();
-        Scenes.GoToMenu();
+        AuthMenuManger.Instance.GoToMenu();
     }
     
     private void setLoading()

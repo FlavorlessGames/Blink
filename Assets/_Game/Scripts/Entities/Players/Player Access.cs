@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerAccess : MonoBehaviour
+
+public class PlayerAccess : NetworkBehaviour
 {
     public Vector3 Position { get { return transform.position; } }
     // Update is called once per frame
-    void Start()
+    public override void OnNetworkSpawn()
     {
+        Debug.Assert(EntityManager.Instance != null);
         EntityManager.Instance.AddLiving(this);
     }
 
