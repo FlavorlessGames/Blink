@@ -7,13 +7,12 @@ using UnityEditor;
 
 public class SceneSelector : MonoBehaviour
 {
-    public SceneAsset MainMenu;
     public List<SceneAsset> Scenes;
 
-
-    public void GoToMenu()
+    public IEnumerator Start()
     {
-        SceneManager.LoadScene(MainMenu.name);
+        yield return new WaitUntil(() => NetworkManager.Singleton.SceneManager != null);
+        LoadingManager.Instance.Init();
     }
 
     public string [] SceneNames()
@@ -30,6 +29,7 @@ public class SceneSelector : MonoBehaviour
 
     public void Load(string name)
     {
-        NetworkManager.Singleton.SceneManager.LoadScene(name, LoadSceneMode.Single);
+        Debug.Assert(LoadingManager.Instance != null);
+        LoadingManager.Instance.LoadScene(name);
     }
 }
