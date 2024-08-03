@@ -41011,7 +41011,7 @@ PrefabInstance:
       objectReference: {fileID: 380135746}
     - target: {fileID: 3190460717295928709, guid: 02bcddf8cb6019940bb7aea030fcc152, type: 3}
       propertyPath: _resetOnDeath
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3880257555063721095, guid: 02bcddf8cb6019940bb7aea030fcc152, type: 3}
       propertyPath: GlobalObjectIdHash
