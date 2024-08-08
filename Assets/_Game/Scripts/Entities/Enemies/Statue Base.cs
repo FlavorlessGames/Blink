@@ -13,6 +13,8 @@ public class StatueBase : MonoBehaviour
     private StatueBehavior _statueBehavior;
     public float DetectionRange { get { return _detectionDistance; } }
     private bool _locked = false;
+    private bool _stopped = false;
+    public bool Stopped => _stopped;
 
     // Start is called before the first frame update
     void Start()
@@ -33,22 +35,25 @@ public class StatueBase : MonoBehaviour
     public void Stop()
     {
         setVisibility(true);
+        if (!_agent.enabled) return;
         _agent.velocity = Vector3.zero;
         _agent.ResetPath();
         _agent.isStopped = true;
+        _stopped = true;
         // _agent.Sleep();
     }
 
     public void Resume()
     {
         if (_locked) return;
+        if (!_agent.enabled) return;
         setVisibility(false);
         _agent.isStopped = false;
+        _stopped = false;
     }
 
     public void Lock()
     {
-        setVisibility(true);
         _locked = true;
         Stop();
     }
@@ -56,6 +61,12 @@ public class StatueBase : MonoBehaviour
     public void Unlock()
     {
         _locked = false;
+        Resume();
+    }
+
+    public void LockMovement()
+    {
+        _agent.enabled = false;
     }
     
     private void setVisibility(bool canSee)
@@ -70,6 +81,7 @@ public class StatueBase : MonoBehaviour
 
     public void SetDestination(Vector3 destination)
     {
+        if (!_agent.enabled) return;
         _agent.SetDestination(destination);
     }
 }

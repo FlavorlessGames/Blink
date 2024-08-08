@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(StatueBase))]
 public class EnemyKill : MonoBehaviour
 {
     [SerializeField] private float _killRange = 3f;
-    private bool _stopped;
+    private StatueBase _base;
+
 
     void Start()
     {
-        LightDetection lightDetection = GetComponent<LightDetection>();
-        if (lightDetection == null) return;
-        lightDetection.SpottedEvent += stop;
-        lightDetection.EyesAvertedEvent += resume;
+        _base = GetComponent<StatueBase>();
     }
     
     void Update()
@@ -20,24 +19,15 @@ public class EnemyKill : MonoBehaviour
         kill();
     }
 
-    private void stop()
-    {
-        _stopped = true;
-    }
-
-    private void resume()
-    {
-        _stopped = false;
-    }
-
     private void kill()
     {
-        if (_stopped) return;
+        if (_base.Stopped) return;
         foreach (Vector3 player in EntityManager.Instance.GetPlayerPositions())
         {
             if (!Utility.InRange(transform.position, player, _killRange)) continue;
             raycastKill(player);
         }
+
     }
 
     private void raycastKill(Vector3 playerPosition)

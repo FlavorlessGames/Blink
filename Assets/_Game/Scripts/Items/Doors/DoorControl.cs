@@ -26,7 +26,6 @@ public class DoorControl : MonoBehaviour
         bool enable = false;
         foreach (SwitchGroup sg in _switchGroups)
         {
-            Debug.Log(string.Format("{0}, {1}", sg.Open, enable));
             if (sg.Open)
             {
                 enable = true;

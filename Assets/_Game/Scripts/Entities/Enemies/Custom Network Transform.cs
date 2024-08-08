@@ -27,6 +27,7 @@ public class CustomNetworkTransform : NetworkBehaviour
 
     public void Sync()
     {
+        if (!_agent.enabled) return;
         if (_agent.isStopped) return;
         if (IsServer) return;
         Vector3 currentPos = transform.position;
