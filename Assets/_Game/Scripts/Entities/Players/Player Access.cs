@@ -7,6 +7,7 @@ using Unity.Netcode;
 public class PlayerAccess : NetworkBehaviour
 {
     public Vector3 Position { get { return transform.position; } }
+    public event DestroyedPlayerHandler PlayerDestroyed;
     // Update is called once per frame
     public override void OnNetworkSpawn()
     {
@@ -30,4 +31,11 @@ public class PlayerAccess : NetworkBehaviour
         Debug.Log("Killed");
         EntityManager.Instance.PlayerKilled(this);
     }
+
+    public override void OnDestroy()
+    {
+        PlayerDestroyed?.Invoke(this);
+    }
 }
+
+public delegate void DestroyedPlayerHandler(PlayerAccess pa);

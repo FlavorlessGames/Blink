@@ -37,6 +37,7 @@ public class EntityManager : MonoBehaviour
     {
         if (_livingPlayers.Contains(pa)) return;
         _livingPlayers.Add(pa);
+        pa.PlayerDestroyed += removePlayer;
     }
 
     public void UpdatePosition(PlayerAccess playerPosition, Vector3 location)
@@ -140,5 +141,10 @@ public class EntityManager : MonoBehaviour
     {
         Debug.Assert(pa != null);
         return Vector3.Distance(ea.Position, pa.Position);
+    }
+
+    private void removePlayer(PlayerAccess pa)
+    {
+        _playerPositions.Remove(pa);
     }
 }
