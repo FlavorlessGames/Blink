@@ -76,10 +76,10 @@ public class LightSource : MonoBehaviour
     {
         Vector3 direction = (enemyPosition - _light.transform.position).normalized;
         LineOfSightDetection losd = rayCastLineOfSight(direction);
-        Debug.Log(string.Format("direct: {0}", losd));
+        // Debug.Log(string.Format("direct: {0}", losd));
         if (losd.CanSee) return losd.Entity;
         losd = checkFOV(direction);
-        Debug.Log(string.Format("fov: {0}", losd));
+        // Debug.Log(string.Format("fov: {0}", losd));
         return losd.Entity;
     }
     

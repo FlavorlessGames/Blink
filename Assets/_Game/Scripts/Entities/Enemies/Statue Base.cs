@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using fgames.Debug;
 
 public class StatueBase : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class StatueBase : MonoBehaviour
         if (lightDetection == null) return;
         lightDetection.SpottedEvent += Stop;
         lightDetection.EyesAvertedEvent += Resume;
+        if (DebugManager.Instance.DisableStatues) Lock();
+        DebugManager.Instance.DisableStatuesUpdate += updateStatuesEnabled;
     }
 
     void OnDrawGizmosSelected()
@@ -83,5 +86,15 @@ public class StatueBase : MonoBehaviour
     {
         if (!_agent.enabled) return;
         _agent.SetDestination(destination);
+    }
+
+    private void updateStatuesEnabled(bool flag)
+    {
+        if (flag)
+        {
+            Unlock();
+            return;
+        }
+        Lock();
     }
 }
