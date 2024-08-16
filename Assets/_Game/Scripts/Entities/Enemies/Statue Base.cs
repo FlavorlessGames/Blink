@@ -35,6 +35,12 @@ public class StatueBase : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _detectionDistance);
     }
 
+    // void Update()
+    // {
+    //     Debug.Log(_locked);
+    //     Debug.Log(_stopped);
+    // }
+
     public void Stop()
     {
         setVisibility(true);
@@ -57,6 +63,7 @@ public class StatueBase : MonoBehaviour
 
     public void Lock()
     {
+        Debug.Log("Lock");
         _locked = true;
         Stop();
     }
@@ -84,6 +91,7 @@ public class StatueBase : MonoBehaviour
 
     public void SetDestination(Vector3 destination)
     {
+        // Debug.Log(destination);
         if (!_agent.enabled) return;
         _agent.SetDestination(destination);
     }

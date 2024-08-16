@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using fgames.Debug;
 
 [RequireComponent(typeof(StatueBase))]
 public class EnemyKill : MonoBehaviour
@@ -27,7 +28,6 @@ public class EnemyKill : MonoBehaviour
             if (!Utility.InRange(transform.position, player, _killRange)) continue;
             raycastKill(player);
         }
-
     }
 
     private void raycastKill(Vector3 playerPosition)
@@ -46,9 +46,8 @@ public class EnemyKill : MonoBehaviour
     {
         pa.Kill(); 
         EntityManager.Instance.ClearTarget(GetComponent<EnemyAccess>());
-        gameObject.SetActive(false); // Todo: remove and add real death behavior
+        if (DebugManager.Instance.StatueSelfHarm) gameObject.SetActive(false); // Todo: remove and add real death behavior
     }
-
-
-    public delegate void GenericHandler();
 }
+
+// public delegate void GenericHandler();

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace fgames.Debug
 {
-    public class DebugManager : Singleton<DebugManager>
+    public class DebugManager : SingletonNetwork<DebugManager>
     {
         public bool InfiniteBattery { 
             get { return _infiniteBattery; } 

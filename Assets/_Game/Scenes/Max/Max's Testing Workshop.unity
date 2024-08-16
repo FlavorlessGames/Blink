@@ -2003,7 +2003,6 @@ Transform:
   m_Children:
   - {fileID: 1538007594}
   - {fileID: 441999488}
-  - {fileID: 1391454052}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &661175423
@@ -2754,6 +2753,7 @@ Transform:
   - {fileID: 1110269664}
   - {fileID: 944805025}
   - {fileID: 2007519062}
+  - {fileID: 1391454052}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &819506564 stripped
@@ -2767,7 +2767,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 642163571}
+    m_TransformParent: {fileID: 818843857}
     m_Modifications:
     - target: {fileID: 868508838430053128, guid: b7f56a21a8213a44bb3d4120498f1034, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2816,6 +2816,10 @@ PrefabInstance:
     - target: {fileID: 3450192863461450008, guid: b7f56a21a8213a44bb3d4120498f1034, type: 3}
       propertyPath: m_Name
       value: Statue Trap
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450192863461450008, guid: b7f56a21a8213a44bb3d4120498f1034, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6366042061968336412, guid: b7f56a21a8213a44bb3d4120498f1034, type: 3}
@@ -2961,6 +2965,30 @@ PrefabInstance:
     - target: {fileID: 3727407798895319266, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1204001565
+      objectReference: {fileID: 0}
+    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: DisableStatues
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: StatueSelfHarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: _disableStatues
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: _infiniteBattery
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: LevelDoesNotReset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: PlayerWarpOnDeath
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8940873579125612305, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
       propertyPath: m_Name
