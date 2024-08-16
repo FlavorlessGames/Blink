@@ -35,7 +35,7 @@ public class StatueBehavior : NetworkBehaviour
 
     protected void pursueIfInRange()
     {
-        if (targetInRange()) return;
+        if (!targetInRange()) return;
         _mode = EnemyMode.Pursuing;
         _base.Resume();
     }
@@ -51,8 +51,8 @@ public class StatueBehavior : NetworkBehaviour
 
     protected void idleIfOutOfRange()
     {
-        if (!targetInRange()) return;
-        Debug.Log("Idle");
+        if (targetInRange()) return;
+        // Debug.Log("Idle");
         EntityManager.Instance.ClearTarget(_ea);
         _mode = EnemyMode.Idle;
         _base.Stop();
@@ -62,7 +62,8 @@ public class StatueBehavior : NetworkBehaviour
     {
         foreach (PlayerAccess pa in EntityManager.Instance.GetPlayers())
         {
-            if (!Utility.InRange(transform.position, pa.Position, _base.DetectionRange)) return true;
+            // Debug.Log(string.Format("{0}, {1}", pa.Position, ))
+            if (Utility.InRange(transform.position, pa.Position, _base.DetectionRange)) return true;
         }
         return false;
     }
@@ -89,7 +90,7 @@ public class StatueBehavior : NetworkBehaviour
                 target = pa;
             }
         }
-        if (target != null) Debug.Log(target.Position);
+        // if (target != null) Debug.Log(target.Position);
         return target;
     }
 
