@@ -15,7 +15,7 @@ public class StatueBase : MonoBehaviour
     public float DetectionRange { get { return _detectionDistance; } }
     private bool _locked = false;
     private bool _stopped = false;
-    public bool Stopped => _stopped;
+    public bool Stopped { get { return getStopped(); } }
 
     // Start is called before the first frame update
     void Start()
@@ -35,11 +35,15 @@ public class StatueBase : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _detectionDistance);
     }
 
-    // void Update()
-    // {
-    //     Debug.Log(_locked);
-    //     Debug.Log(_stopped);
-    // }
+    void Update()
+    {
+        _agent.isStopped = getStopped();
+    }
+
+    private bool getStopped()
+    {
+        return _stopped || _locked || DebugManager.Instance.DisableStatues;
+    }
 
     public void Stop()
     {
@@ -47,7 +51,7 @@ public class StatueBase : MonoBehaviour
         if (!_agent.enabled) return;
         _agent.velocity = Vector3.zero;
         _agent.ResetPath();
-        _agent.isStopped = true;
+        // _agent.isStopped = true;
         _stopped = true;
         // _agent.Sleep();
     }
@@ -57,7 +61,7 @@ public class StatueBase : MonoBehaviour
         if (_locked) return;
         if (!_agent.enabled) return;
         setVisibility(false);
-        _agent.isStopped = false;
+        // _agent.isStopped = false;
         _stopped = false;
     }
 
@@ -100,9 +104,9 @@ public class StatueBase : MonoBehaviour
     {
         if (flag)
         {
-            Unlock();
+            Lock();
             return;
         }
-        Lock();
+        Unlock();
     }
 }

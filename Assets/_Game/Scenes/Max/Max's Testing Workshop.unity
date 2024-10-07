@@ -2754,6 +2754,7 @@ Transform:
   - {fileID: 944805025}
   - {fileID: 2007519062}
   - {fileID: 1391454052}
+  - {fileID: 2068280750}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &819506564 stripped
@@ -2988,6 +2989,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
       propertyPath: PlayerWarpOnDeath
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
+      propertyPath: _disableStatues.m_InternalValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8940873579125612305, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
@@ -6698,12 +6703,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2068280746}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.13, y: 2.31, z: -16.25}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -91.72377, y: -143.83986, z: -23.264875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 818843857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2068280751
 MonoBehaviour:
@@ -7140,5 +7145,4 @@ SceneRoots:
   - {fileID: 483090212}
   - {fileID: 818843857}
   - {fileID: 642163571}
-  - {fileID: 2068280750}
   - {fileID: 1896685909}
