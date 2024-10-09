@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using fgames.Menus;
 
 public class PauseManager : MonoBehaviour
 {
     public static PauseManager Instance { get; private set; }
 
     public bool IsPaused { get; private set; }
+    [SerializeField] private PauseUI _pauseUI;
 
     [SerializeField] private GameObject _pauseMenu;
     void Update()
@@ -39,7 +41,8 @@ public class PauseManager : MonoBehaviour
     public void Pause()
     {
         IsPaused = true;
-        _pauseMenu.SetActive(true);
+        // _pauseMenu.SetActive(true);
+        _pauseUI.Show();
         Cursor.lockState = CursorLockMode.None;
         AudioListener.pause = true;
     }
@@ -47,7 +50,8 @@ public class PauseManager : MonoBehaviour
     public void UnPause()
     {
         IsPaused = false;
-        _pauseMenu.SetActive(false);
+        // _pauseMenu.SetActive(false);
+        _pauseUI.Hide();
         Cursor.lockState = CursorLockMode.Locked;
         AudioListener.pause = false;
     }

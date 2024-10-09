@@ -1,0 +1,16 @@
+.Container {
+    flex-direction: row;
+    background-color: rgba(101, 103, 103, 0);
+    -unity-slice-left: 1;
+    -unity-slice-top: 1;
+    -unity-slice-right: 1;
+    -unity-slice-bottom: 1;
+    background-image: none;
+}
+
+#header {
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    align-self: auto;
+    justify-content: flex-end;
+}

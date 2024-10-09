@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Stylesheets/Pause%20Page.uss?fileID=7433441132597879392&amp;guid=8d634286dacda934cb669c06c1d9795f&amp;type=3#Pause Page" />
+    <ui:VisualElement class="Container" style="flex-grow: 1;">
+        <ui:VisualElement name="left_bar" style="flex-grow: 1;" />
+        <ui:VisualElement style="flex-grow: 1;">
+            <ui:VisualElement name="header" style="flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+            <ui:VisualElement name="body" style="flex-grow: 1;" />
+            <ui:VisualElement name="footer" style="flex-grow: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="right_bar" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>
