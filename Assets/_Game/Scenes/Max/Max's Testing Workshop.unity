@@ -2959,45 +2959,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3152743933711311205, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: bddb123f0ffbcf54f9bc37b871129c66, type: 2}
-    - target: {fileID: 3182775918130485348, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-      propertyPath: _pauseUI
-      value: 
-      objectReference: {fileID: 1690717599}
     - target: {fileID: 3727407798895319266, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1204001565
-      objectReference: {fileID: 0}
-    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-      propertyPath: DisableStatues
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-      propertyPath: StatueSelfHarm
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-      propertyPath: _disableStatues
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-      propertyPath: _infiniteBattery
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-      propertyPath: LevelDoesNotReset
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-      propertyPath: PlayerWarpOnDeath
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7394243530020369885, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-      propertyPath: _disableStatues.m_InternalValue
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8940873579125612305, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
       propertyPath: m_Name
@@ -3006,13 +2970,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9078046846916818767, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1690717600}
-    - targetCorrespondingSourceObject: {fileID: 9078046846916818767, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1690717599}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
 --- !u!4 &856536486 stripped
 Transform:
@@ -5623,40 +5581,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8074038206903237470, guid: ea5d6e6069298494ebe3a7d9201a0b2e, type: 3}
   m_PrefabInstance: {fileID: 1454675260}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1690717596 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9078046846916818767, guid: 0b792a502a7213a47b43d1bbaf21a2bc, type: 3}
-  m_PrefabInstance: {fileID: 856008935}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1690717599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690717596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ada1a3aa6a68c2d44a803e26f57db406, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiDocument: {fileID: 1690717600}
---- !u!114 &1690717600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690717596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: a5eba554241c8ae48a695c1b686f5d61, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 4c9ac4bb5739d5a4487ce86a444759f3, type: 3}
-  m_SortingOrder: 0
 --- !u!4 &1695938750 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8074038206903237470, guid: ea5d6e6069298494ebe3a7d9201a0b2e, type: 3}
