@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 [RequireComponent(typeof(StatueBase))]
 [RequireComponent(typeof(EnemyAccess))]
-public class StatueBehavior : MonoBehaviour
+public class StatueBehavior : NetworkBehaviour
 {
     [SerializeField] protected EnemyMode _mode;
     protected StatueBase _base;
@@ -19,6 +19,7 @@ public class StatueBehavior : MonoBehaviour
 
     void FixedUpdate()
     {
+        // if (!IsServer) return;
         modeBranch();
     }
 
@@ -34,7 +35,7 @@ public class StatueBehavior : MonoBehaviour
 
     protected void pursueIfInRange()
     {
-        if (targetInRange()) return;
+        if (!targetInRange()) return;
         _mode = EnemyMode.Pursuing;
         _base.Resume();
     }
@@ -50,7 +51,8 @@ public class StatueBehavior : MonoBehaviour
 
     protected void idleIfOutOfRange()
     {
-        if (!targetInRange()) return;
+        if (targetInRange()) return;
+        // Debug.Log("Idle");
         EntityManager.Instance.ClearTarget(_ea);
         _mode = EnemyMode.Idle;
         _base.Stop();
@@ -60,7 +62,8 @@ public class StatueBehavior : MonoBehaviour
     {
         foreach (PlayerAccess pa in EntityManager.Instance.GetPlayers())
         {
-            if (!Utility.InRange(transform.position, pa.Position, _base.DetectionRange)) return true;
+            // Debug.Log(string.Format("{0}, {1}", pa.Position, ))
+            if (Utility.InRange(transform.position, pa.Position, _base.DetectionRange)) return true;
         }
         return false;
     }
@@ -82,11 +85,12 @@ public class StatueBehavior : MonoBehaviour
         foreach (PlayerAccess pa in validTargets())
         {
             if (target == null) target = pa;
-            if (closest(transform.position, target.Position, pa.Position))
+            if (!closest(transform.position, target.Position, pa.Position))
             {
                 target = pa;
             }
         }
+        // if (target != null) Debug.Log(target.Position);
         return target;
     }
 
