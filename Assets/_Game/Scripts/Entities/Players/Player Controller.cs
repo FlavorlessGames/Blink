@@ -21,6 +21,12 @@ public class PlayerMovement : NetworkBehaviour
     private Camera _cam;
     private float _rotationX = 0f;
     private bool _disabled = false;
+    public bool Running { get {
+        Vector3 direction = getMovementDirection();
+        return _currentSpeed == _runSpeed && (
+            direction.magnitude > 0f
+        );
+    }}
 
     // Start is called before the first frame update
     void Start()

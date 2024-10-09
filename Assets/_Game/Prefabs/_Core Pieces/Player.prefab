@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e198a143838f464499665e4de977fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerController: {fileID: 6443998984220877783}
   FlickerInterval: 0.4
   MaxBattery: 100
   LowBattery: 10
