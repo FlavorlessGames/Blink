@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class FlashlightStats : NetworkBehaviour
 {
+    public PlayerMovement PlayerController;
 
     public float FlickerInterval = .2f;
     public float MaxBattery = 50f;
@@ -24,6 +25,7 @@ public class FlashlightStats : NetworkBehaviour
         get 
         { 
             if (ForcedOff) return false;
+            if (PlayerController.Running) return false;
             return TurnedOn;
         }
         set { TurnedOn = value; }
