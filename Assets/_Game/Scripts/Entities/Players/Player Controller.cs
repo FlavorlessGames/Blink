@@ -7,6 +7,7 @@ public class PlayerMovement : NetworkBehaviour
 {
     [SerializeField] private CharacterController _controller;
     [SerializeField] private float _walkSpeed = 5.0f;
+    [SerializeField] private float _runSpeed = 7.5f;
     [SerializeField] private float _lookSpeed = 5.0f;
     [SerializeField] private float _lookLimitX = 100.0f;
     [SerializeField] private float _height = 1.5f;
@@ -14,6 +15,9 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private bool _stopped = false;
     [SerializeField] private GameObject _camera;
     [SerializeField] private GameObject _pov;
+    [SerializeField] private float _jumpPower = 8f;
+    private float _yVelocity;
+    private float _currentSpeed;
     private Camera _cam;
     private float _rotationX = 0f;
     private bool _disabled = false;
@@ -21,6 +25,7 @@ public class PlayerMovement : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _currentSpeed = _walkSpeed;
         _cam = _camera.GetComponent<Camera>();
     }
 
@@ -38,14 +43,41 @@ public class PlayerMovement : NetworkBehaviour
         fall();
         if (_stopped) return;
         if (PauseManager.Instance.IsPaused) return;
+        run();
         move();
         look();
+        jump();
     }
 
     private void fall()
     {
-        if (grounded()) return;
+        if (_yVelocity > 0)
+        {
+            _yVelocity -= (_fallSpeed * Time.deltaTime);
+            if (_yVelocity < 0) _yVelocity = 0f;
+            _controller.Move(new Vector3(0, _yVelocity, 0) * Time.deltaTime);
+        }
+        if (grounded()) {
+            _yVelocity = 0f;
+            return;
+        }
         _controller.Move(-transform.up * _fallSpeed * Time.deltaTime);
+    }
+
+    private void jump()
+    {
+        if (!Input.GetButtonDown("Jump")) return;
+        if (!grounded()) return;
+        // Debug.Log("Jump");
+        _yVelocity = _jumpPower;
+        // _controller.Move(new Vector3(0, 1500, 0) * Time.deltaTime);
+    }
+
+    private void run()
+    {
+        // if (DebugManager.Instance.DisableSprint) return;
+        _currentSpeed = Input.GetButton("Run") ? _runSpeed : _walkSpeed;
+        // Debug.Log(_currentSpeed);
     }
 
     private bool grounded()
@@ -67,7 +99,7 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
         Vector3 relativeDirection = transform.TransformDirection(direction);
-        _controller.Move(relativeDirection * _walkSpeed * Time.deltaTime);
+        _controller.Move(relativeDirection * _currentSpeed * Time.deltaTime);
     }
 
     private void look()
