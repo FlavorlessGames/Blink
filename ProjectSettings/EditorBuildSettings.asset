@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/_Game/Scenes/Giacomo/Test Levels/TestLevelTiling.unity
     guid: 4263d016f1b6a4fd99df8e7fa33c9bf8
   - enabled: 1
-    path: Assets/_Game/Scenes/Giacomo/Levels For Testing/Cloisters.unity
+    path: Assets/_Game/Scenes/Giacomo/Level Prototypes/Cloisters.unity
     guid: 1c4464a08855a42818d9d410d7ce4e20
   - enabled: 1
     path: Assets/_Game/Scenes/_Core/Reference/Scene Template.unity
@@ -42,21 +42,27 @@ EditorBuildSettings:
     path: Assets/Scenes/Multiplayer Scenes/Max First Scene.unity
     guid: d6f9427121fce1646a5211b6aba806c7
   - enabled: 1
-    path: Assets/_Game/Scenes/Giacomo/Multiplayer Level Testing.unity
+    path: Assets/_Game/Scenes/Giacomo/Test Levels/Multiplayer Level Testing.unity
     guid: 31105b44a30241541b7b5da23c907bf1
   - enabled: 1
     path: Assets/_Game/Scenes/_Core/Start With This Scene.unity
     guid: 0ea63483cce1c794c849cc4ba46da8bd
   - enabled: 1
-    path: Assets/_Game/Scenes/Giacomo/Dormitory.unity
+    path: Assets/_Game/Scenes/Giacomo/Level Prototypes/Dormitory.unity
     guid: 0cb4862a5bed940a09317e2e971f4e3a
   - enabled: 1
-    path: Assets/_Game/Scenes/Giacomo/Levels For Testing/Follower.unity
+    path: Assets/_Game/Scenes/Giacomo/Level Prototypes/Follower.unity
     guid: 5a040da0593b74b04992693869127af3
   - enabled: 1
-    path: Assets/_Game/Scenes/Giacomo/Levels For Testing/The Sept.unity
+    path: Assets/_Game/Scenes/Giacomo/Level Prototypes/The Sept.unity
     guid: f4fbb1eab98214c719608b0e4e80b9f6
   - enabled: 1
-    path: Assets/_Game/Scenes/Giacomo/Labyrinth.unity
+    path: Assets/_Game/Scenes/Giacomo/Level Prototypes/Labyrinth.unity
     guid: 5d425315a69684faf82190a106240a75
+  - enabled: 1
+    path: Assets/_Game/Scenes/Giacomo/Game Sequence Scenes/EnteringTheCatacombs.unity
+    guid: e6fae12ec4a1549688ba1e4ba3466e81
+  - enabled: 1
+    path: Assets/_Game/Scenes/Giacomo/Game Sequence Scenes/First Encounter.unity
+    guid: 1d72f2d72fcf84d398afde89f319c241
   m_configObjects: {}
