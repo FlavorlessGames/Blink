@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4280727722
+  GlobalObjectIdHash: 254716095
   InScenePlacedSourceGlobalObjectIdHash: 254716095
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -80,13 +80,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controller: {fileID: 8472043959535785218}
   _walkSpeed: 5
+  _runSpeed: 7.5
   _lookSpeed: 5
   _lookLimitX: 100
   _height: 0.1
-  _fallSpeed: 3
+  _fallSpeed: 9
   _stopped: 0
   _camera: {fileID: 5117604304333956524}
   _pov: {fileID: 1058688208026307188}
+  _jumpPower: 13
 --- !u!143 &8472043959535785218
 CharacterController:
   m_ObjectHideFlags: 0
@@ -159,7 +161,6 @@ MonoBehaviour:
   _flashlight: {fileID: 916803265524365320}
   _cam: {fileID: 8813745848646354245}
   _audio: {fileID: 3021828596501593616}
-  DebugFlag: 1
   BatteryPackPrefab: {fileID: 2329293304500715468, guid: d2be90d03919cca41adced498c97e5ea, type: 3}
 --- !u!136 &4526370939932856203
 CapsuleCollider:
@@ -272,6 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e198a143838f464499665e4de977fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerController: {fileID: 6443998984220877783}
   FlickerInterval: 0.4
   MaxBattery: 100
   LowBattery: 10

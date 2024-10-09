@@ -1,19 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(TransformLerper))]
 public class StatueTrap : MonoBehaviour
 {
-    [SerializeField] private bool _armed;
+    [SerializeField] private bool _armed = true;
     public event TrapTriggerHandler TrapTriggered;
-    private List<StatueBase> _lockedStatues;
-
-    void Start()
-    {
-        _lockedStatues = new List<StatueBase>();
-    }
+    [SerializeField] private Transform _statueLockPosition;
+    private StatueBase _lockedStatue;
 
     void OnTriggerEnter(Collider other)
     {
+        if (!_armed) return;
         StatueBase sb = other.GetComponent<StatueBase>();
         if (sb == null) return;
         triggerTrap(sb);
@@ -21,20 +19,15 @@ public class StatueTrap : MonoBehaviour
 
     private void triggerTrap(StatueBase sb)
     {
-        if (!_armed) return;
+        Debug.Assert(_armed);
+        if (_statueLockPosition == null) _statueLockPosition = transform;
+        Disarm();
+        TransformLerper lerper = GetComponent<TransformLerper>();
         sb.Lock();
-        _lockedStatues.Add(sb);
+        sb.LockMovement();
+        _lockedStatue = sb;
+        lerper.LerpTo(sb.gameObject, _statueLockPosition, 1f);
         TrapTriggered?.Invoke();
-    }
-
-    public void FreeStatues()
-    {
-        foreach (StatueBase sb in _lockedStatues)
-        {
-            sb.Unlock();
-        }
-
-        _lockedStatues.Clear();
     }
 
     public void Arm()
@@ -45,7 +38,6 @@ public class StatueTrap : MonoBehaviour
     public void Disarm()
     {
         _armed = false;
-        FreeStatues();
     }
 
     public delegate void TrapTriggerHandler();

@@ -11,5 +11,17 @@ namespace fgames.Menus
             newButton.text = text;
             return newButton;
         }
+
+        public static Toggle NewToggle(string text, bool value, Action<bool> onChange)
+        {
+            Toggle newToggle = new Toggle(text);
+            newToggle.value = value;
+            newToggle.RegisterCallback<ChangeEvent<bool>>((evt) => {
+                // Debug.Log(evt.newValue);
+                // valueChanged?.Invoke(evt.newValue);
+                onChange(evt.newValue);
+            });
+            return newToggle;
+        }
     }
 }

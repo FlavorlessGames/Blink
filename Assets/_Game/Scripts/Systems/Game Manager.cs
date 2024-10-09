@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using fgames.Playtesting;
 
 public class GameManager : SingletonNetwork<GameManager> {
     [SerializeField] private PlayerMovement _playerPrefab;
@@ -11,6 +12,7 @@ public class GameManager : SingletonNetwork<GameManager> {
     private bool _singlePlayer;
 
     private List<ulong> _connectedClients = new List<ulong>();
+    public Vector3 SpawnLocation => getSpawnLocation();
 
     void Start()
     {
@@ -58,7 +60,7 @@ public class GameManager : SingletonNetwork<GameManager> {
 
     private void SpawnPlayer(ulong playerId, int playerIndex = 0) 
     {
-        Debug.Log("Spawn");
+        // Debug.Log("Spawn");
         Debug.Assert(_spawnPoint != null);
         Transform sp = _spawnPoint.transform;
         Vector3 spawnPoint = sp.position + Vector3.forward * playerIndex;
@@ -75,7 +77,7 @@ public class GameManager : SingletonNetwork<GameManager> {
 
     public void AllPlayersKilled()
     {
-        if (!_resetOnDeath) return;
+        if (DebugManager.Instance.LevelDoesNotReset) return;
         if (!IsHost) return;
         Scene currentScene = SceneManager.GetActiveScene();
         NetworkManager.Singleton.SceneManager.LoadScene(currentScene.name, LoadSceneMode.Single);
@@ -116,5 +118,11 @@ public class GameManager : SingletonNetwork<GameManager> {
         newGameObjectNetworkObject.SpawnWithOwnership(newClientOwnerId, destroyWithScene);
 
         return newGameObject;
+    }
+
+    private Vector3 getSpawnLocation()
+    {
+        Debug.Assert(_spawnPoint != null);
+        return _spawnPoint.transform.position;
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using fgames.Playtesting;
 
 [RequireComponent(typeof(FlashlightStats))]
 public class FlashlightLogic : NetworkBehaviour
@@ -9,7 +10,7 @@ public class FlashlightLogic : NetworkBehaviour
     [SerializeField] private Light _flashlight;
     [SerializeField] private Camera _cam;
     [SerializeField] private PositionalAudio _audio;
-    public bool DebugFlag = false;
+    // public bool DebugFlag = false;
     private bool _flickering = false;
     private float _flickerTimer;
     private int _batteryPacks = 0;
@@ -23,6 +24,7 @@ public class FlashlightLogic : NetworkBehaviour
     {
         _stats = GetComponent<FlashlightStats>();
         FlameColors.Standard = _flashlight.color;
+        Debug.Assert(DebugManager.Instance != null);
     }
 
     public override void OnNetworkSpawn() 
@@ -79,7 +81,8 @@ public class FlashlightLogic : NetworkBehaviour
 
     private bool focusOnCooldown()
     {
-        if (DebugFlag) return false;
+        // if (DebugFlag) return false;
+        if (DebugManager.Instance.DisableFlashlightCooldown) return false;
         return _focusTimer > 0;
     }
 
@@ -116,12 +119,16 @@ public class FlashlightLogic : NetworkBehaviour
     {
         if (_flickering) return;
 
+        if (DebugManager.Instance.InfiniteBattery) return;
+
         if (_stats.CurrentBattery < _stats.LowBattery) _flickering = true;
     }
 
     private bool outOfBattery()
     {
         if (_stats.CurrentBattery > 0) return false;
+
+        if (DebugManager.Instance.InfiniteBattery) return false;
 
         _stats.ForcedOff = true;
         _stats.CurrentBattery = 0f;
@@ -130,6 +137,7 @@ public class FlashlightLogic : NetworkBehaviour
 
     private void updateBatteryLevel()
     {
+        if (DebugManager.Instance.InfiniteBattery) return;
         _stats.CurrentBattery -= Time.deltaTime;
         HUDManager.Instance.SetBatteryLevel(100 * _stats.CurrentBattery / _stats.MaxBattery);
     }
@@ -174,8 +182,7 @@ public class FlashlightLogic : NetworkBehaviour
 
     private void chargeBattery()
     {
-        Debug.Log("charge");
-        if (!sufficientBatteryPacksCheck() && !DebugFlag) return;
+        if (insufficientBatteryPacks()) return;
         cancelCharge();
         _chargingCoroutine = StartCoroutine(chargeTimer());
     }
@@ -215,11 +222,11 @@ public class FlashlightLogic : NetworkBehaviour
         _stats.ForcedOff = false;
     }
 
-    private bool sufficientBatteryPacksCheck()
+    private bool insufficientBatteryPacks()
     {
-        if (_batteryPacks > 0) return true;
-        return false;
-        // Use this function to setup a debug
+        if (DebugManager.Instance.UnlimitedBatteryPacks) return false;
+        if (_batteryPacks > 0) return false;
+        return true;
     }
 
     private IEnumerator LerpLight(float targetAngle, float targetRange)
