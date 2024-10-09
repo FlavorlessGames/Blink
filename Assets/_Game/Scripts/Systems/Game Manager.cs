@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using fgames.Debug;
+using fgames.Playtesting;
 
 public class GameManager : SingletonNetwork<GameManager> {
     [SerializeField] private PlayerMovement _playerPrefab;

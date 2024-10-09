@@ -1,7 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 
-namespace fgames.Debug
+namespace fgames.Playtesting
 {
     public class DebugManager : SingletonNetwork<DebugManager>
     {

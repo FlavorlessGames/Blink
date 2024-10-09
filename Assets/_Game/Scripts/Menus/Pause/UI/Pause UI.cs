@@ -44,7 +44,7 @@ namespace fgames.Menus
 
         private void debugScreen()
         {
-            UnityEngine.Debug.Log("Debug");
+            Debug.Log("Debug");
             if (_debugPage != null)
             {
                 _debugPage.Activate(_page);

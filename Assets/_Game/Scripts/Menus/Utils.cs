@@ -17,7 +17,7 @@ namespace fgames.Menus
             Toggle newToggle = new Toggle(text);
             newToggle.value = value;
             newToggle.RegisterCallback<ChangeEvent<bool>>((evt) => {
-                // UnityEngine.Debug.Log(evt.newValue);
+                // Debug.Log(evt.newValue);
                 // valueChanged?.Invoke(evt.newValue);
                 onChange(evt.newValue);
             });

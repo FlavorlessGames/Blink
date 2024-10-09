@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using fgames.Debug;
+using fgames.Playtesting;
 
 [RequireComponent(typeof(StatueBase))]
 public class EnemyKill : MonoBehaviour

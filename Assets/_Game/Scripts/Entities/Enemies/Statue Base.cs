@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using fgames.Debug;
+using fgames.Playtesting;
 
 public class StatueBase : MonoBehaviour
 {

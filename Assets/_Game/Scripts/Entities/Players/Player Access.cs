@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-using fgames.Debug;
+using fgames.Playtesting;
 
 
 public class PlayerAccess : NetworkBehaviour
